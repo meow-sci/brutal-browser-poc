@@ -15,12 +15,14 @@ const url = a.url ?? (server = a.preview ? await preview({ root, logLevel: 'warn
 const abs = (p) => new URL(p, url);
 const bad = [];
 let n = 0;
+// Static hosts (GitHub Pages) send application/javascript where Vite sends text/javascript; both are JavaScript MIME types for module scripts.
+const isType = (type, expected) => type.startsWith(expected) || (expected === 'text/javascript' && type.startsWith('application/javascript'));
 async function get(route, expectType) {
   const res = await fetch(route instanceof URL ? route : abs(route), { headers: { 'accept-encoding': 'identity' } });
   const type = res.headers.get('content-type') ?? '';
   const body = Buffer.from(await res.arrayBuffer());
   n++;
-  if (!res.ok || type.startsWith('text/html') || (expectType && !type.startsWith(expectType)) || !body.length) bad.push(`${res.status} ${type || '-'} ${route}`);
+  if (!res.ok || type.startsWith('text/html') || (expectType && !isType(type, expectType)) || !body.length) bad.push(`${res.status} ${type || '-'} ${route}`);
   return body;
 }
 
