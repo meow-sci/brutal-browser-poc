@@ -1,0 +1,21 @@
+<!doctype html><html><body><canvas id="c" width="64" height="64"></canvas><script>
+window.probe = (async () => {
+  const r = { hasGpu: !!navigator.gpu, ua: navigator.userAgent, isolated: self.crossOriginIsolated };
+  if (!navigator.gpu) return r;
+  try {
+    const a = await navigator.gpu.requestAdapter();
+    r.adapter = !!a;
+    if (a) {
+      const i = a.info || (a.requestAdapterInfo ? await a.requestAdapterInfo() : {});
+      r.info = { vendor: i.vendor, architecture: i.architecture, device: i.device, description: i.description, isFallbackAdapter: i.isFallbackAdapter, subgroupMinSize: i.subgroupMinSize };
+      r.isFallbackAdapterProp = a.isFallbackAdapter;
+      r.features = [...a.features].sort();
+      const d = await a.requestDevice();
+      r.device = !!d;
+      r.preferred = navigator.gpu.getPreferredCanvasFormat();
+      r.limits = { maxUniformBufferBindingSize: a.limits.maxUniformBufferBindingSize, minUniformBufferOffsetAlignment: a.limits.minUniformBufferOffsetAlignment, maxBufferSize: a.limits.maxBufferSize };
+    }
+  } catch (e) { r.error = String(e); }
+  return r;
+})();
+</script></body></html>

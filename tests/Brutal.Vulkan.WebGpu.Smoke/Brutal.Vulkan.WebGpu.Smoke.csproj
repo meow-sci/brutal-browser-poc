@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!--
+    Browser smoke test of the web ICD: a textured, depth-tested triangle pair rendered through the real Brutal.Vulkan API
+    (Brutal.Vulkan.Browser + Abstractions) on WebGPU. test/run.mjs publishes it, serves publish/wwwroot and checks pixels.
+  -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Vulkan.WebGpu.Smoke</AssemblyName>
+    <RootNamespace>WebGpuIcdSmoke</RootNamespace>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <WasmEnableHotReload>false</WasmEnableHotReload>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+    <!-- BRUTALCORE0011: prefer UTF-8 literals - irrelevant for a test app -->
+    <NoWarn>$(NoWarn);BRUTALCORE0011</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <StaticWebAssetFingerprintPattern Include="JS" Pattern="*.js" Expression="#[.{fingerprint}]!" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Vulkan.Abstractions.Browser/Brutal.Vulkan.Abstractions.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Vulkan.WebGpu/Brutal.Vulkan.WebGpu.csproj" />
+    <ProjectReference Include="../../src/Brutal.Browser/Brutal.Browser.csproj" />
+  </ItemGroup>
+
+  <!-- shaders -> SPIR-V (embedded "Shaders/<name>.<ext>.spv") + WGSL manifest ("Shaders/manifest.json") -->
+  <ItemGroup>
+    <ShaderSource Include="Shaders/tri.vert;Shaders/tri.frag;Shaders/fill.comp" />
+  </ItemGroup>
+  <Import Project="$(RepoRoot)tools/Shaders.targets" />
+</Project>

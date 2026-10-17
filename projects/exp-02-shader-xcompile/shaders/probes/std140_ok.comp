@@ -1,0 +1,10 @@
+#version 450
+// Companion to std140_layout.comp: members whose std140 offsets coincide with WGSL's natural layout.
+// The CPU writes slot i (byte offset 4*i) with the value i. std140 offsets: a@0, m@16 (columns 4 apart), v3@80, tail@92,
+// m3@96 (3 columns, 4 slots apart, ends at 144), arr4@144/160.  Expected reads: a.y=1, m[1].z=10, v3.z=22, tail=23, m3[1].y=29, arr4[1].w=43
+layout(local_size_x = 1) in;
+layout(std140, set = 0, binding = 0) uniform U { vec4 a; mat4 m; vec3 v3; float tail; mat3 m3; vec4 arr4[2]; } u;
+layout(std430, set = 0, binding = 1) buffer O { float o[]; } outb;
+void main() {
+    outb.o[0] = u.a.y; outb.o[1] = u.m[1].z; outb.o[2] = u.v3.z; outb.o[3] = u.tail; outb.o[4] = u.m3[1].y; outb.o[5] = u.arr4[1].w;
+}

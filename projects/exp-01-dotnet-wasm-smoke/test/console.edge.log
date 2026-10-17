@@ -1,0 +1,78 @@
+[+   267ms] [driver] browser=Edg/155.0.4283.45 executable=/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge
+[+   267ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/out/release-verbose/wwwroot
+[+   267ms] [driver] ===== single: http://127.0.0.1:58315/index.html?skip=T07,T08,T08b,T09,T09b,T10,T13b
+[+   329ms] [server] 404 /favicon.ico
+[+   352ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   357ms] [console.log] HOST runtime created in 51 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   372ms] [console.log] SMOKE START args=[start,skip=T07,T08,T08b,T09,T09b,T10,T13b]
+[+   381ms] [console.log] BEGIN T01
+[+   384ms] [console.log] TEST T01 env: PASS IsBrowser=True; IsWasi=False; OSDescription='Browser'; OSArchitecture=Wasm; ProcessArchitecture=Wasm; FrameworkDescription='.NET 10.0.1'; RuntimeIdentifier=browser-wasm; IntPtr.Size=4; ProcessorCount=1; Is64BitProcess=False; Vector128.IsHardwareAccelerated=True; Vector.IsHardwareAccelerated=True; Vector<float>.Count=4; PackedSimd.IsSupported=True; Stopwatch.Frequency=1000000000; Stopwatch.IsHighResolution=True; Environment.Version=10.0.1; IsDynamicCodeSupported=True; IsDynamicCodeCompiled=False; ThreadId=1; GC.TotalAvailableMemoryBytes=2147483648
+[+   384ms] [console.log] BEGIN T02
+[+   391ms] [console.log] TEST T02 brutal-platform: FAIL System.TypeInitializationException: The type initializer for 'Brutal.Platform' threw an exception. | inner System.PlatformNotSupportedException: Unsupported platform
+[+   391ms] [console.log] BEGIN T03
+[+   397ms] [console.log] TEST T03 brutal-numerics: PASS float3.Transform((1,0,0), RotY(pi/2)*T(1,2,3)) = <0.99999994, 2, 2> (System.Numerics=<0.99999994, 2, 2>); float4x4*float4 = <-4.371139E-08, 0, 1, 2>; cross(X,Y)=<0, 0, 1>; sizeof(float4x4)=64; Random(42).NextSinglePointInBox(2)=<1.3362129, 0.2818146, 0.25103658>
+[+   397ms] [console.log] BEGIN T03b
+[+   400ms] [console.log] TEST T03b brutal-collections-logging: PASS NativeList: ok Size=12 B Capacity=16 B; LogCategory.Make: ok Name=Smoke LogSystem.IsEnabled=False
+[+   400ms] [console.log] BEGIN T03c
+[+   421ms] [console.log] TEST T03c brutal-logging-console-provider: FAIL System.PlatformNotSupportedException: Operation is not supported on this platform.
+[+   421ms] [console.log] BEGIN T03d
+[+   426ms] [console.log] LOG [Information] SmokeCustom: hello from Brutal.Logging via a custom ILoggerProvider (Console.WriteLine)
+[+   426ms] [console.log] TEST T03d brutal-logging-custom-provider: PASS LogSystem.Initialize(custom provider) ok; IsEnabled=True (expect a 'LOG [Information] SmokeCustom' line above)
+[+   426ms] [console.log] BEGIN T04
+[+   443ms] [console.log] TEST T04 brutal-memory: PASS Mem.AllocZeroed<byte>(1MB) at 0x1BD2930 zeroed=True sum=133693440; Mem.Alloc(1MB) at 0x1BD2930 last=0xAB; Mem.AllocAndCopy(float4).W=4; NativeMemory.Alloc ok v=7; AlignedAlloc(256) aligned=True; AllocHGlobal ok v=0x1234567
+[+   444ms] [console.log] BEGIN T04b
+[+   448ms] [console.log] TEST T04b memory-growth-256MB: PASS 256MB NativeMemory.Alloc at 0x1D977C0 touched+freed in 4.0 ms
+[+   448ms] [console.log] BEGIN T05
+[+   448ms] [console.log] INFO T05 second access to Vulkan.GetInstanceProcAddr: EX System.TypeInitializationException: The type initializer for 'Brutal.VulkanApi.Vulkan' threw an exception. | inner System.NullReferenceException: Failed to load Vulkan library
+[+   448ms] [console.log] INFO T05 access to Vulkan.Log (static field of same class): EX System.TypeInitializationException: The type initializer for 'Brutal.VulkanApi.Vulkan' threw an exception. | inner System.NullReferenceException: Failed to load Vulkan library
+[+   448ms] [console.log] TEST T05 brutal-vulkan-static-ctor: FAIL System.TypeInitializationException: The type initializer for 'Brutal.VulkanApi.Vulkan' threw an exception. | inner System.NullReferenceException: Failed to load Vulkan library
+[+   449ms] [console.log] BEGIN T05b
+[+   450ms] [console.log] TEST T05b brutal-vulkan-types-without-ctor: PASS VkInstance(0x1234).VkHandle=0x1234 IsNull=False NullHandle.IsNull=True; Unsafe.SizeOf<VkBufferCreateInfo>=56 (expect 56); offsetof(Next)=8 offsetof(QueueFamilyIndices)=48 (expect 8/48: explicit x64 layout kept on wasm32); bci.sType=12 (BufferCreateInfo=12) Size=65536 Usage=VertexBufferBit; sizeof(VkBuffer)=4 (expect 4 on wasm32; C ABI non-dispatchable handle is 8); sizeof(VkInstance)=4 sizeof(PfnVkVoidFunction)=4; Unsafe.SizeOf<VkInstanceCreateInfo>=64 Unsafe.SizeOf<VkPhysicalDeviceProperties>=824; Marshal.SizeOf<VkBufferCreateInfo>=56; VK.MAX_EXTENSION_NAME_SIZE=256 VK.WHOLE_SIZE as ByteSize64=0xFFFFFFFF (C VK_WHOLE_SIZE=~0ULL=0xFFFFFFFFFFFFFFFF); VkResult.Success=0 VkResult.ErrorDeviceLost=-4
+[+   450ms] [console.log] BEGIN T06
+[+   451ms] [console.log] TEST T06 nativelibrary: PASS TryLoad(vulkan)=False h=0x0; TryLoad(libvulkan.so.1)=False h=0x0; TryLoad(__Internal)=False h=0x0; TryLoad(libSystem.Native)=True h=0x93B68; Load(vulkan, asm, LegacyBehavior)=EX System.DllNotFoundException: vulkan; GetMainProgramHandle()=EX System.ComponentModel.Win32Exception: No error information; TryGetExport(main,malloc)=EX System.ArgumentNullException: Value cannot be null. (Parameter 'handle'); TryGetExport(main,mono_wasm_load_runtime)=EX System.ArgumentNullException: Value cannot be null. (Parameter 'handle'); TryGetExport(main,vkGetInstanceProcAddr)=EX System.ArgumentNullException: Value cannot be null. (Parameter 'handle')
+[+   451ms] [console.log] BEGIN T06b
+[+   452ms] [console.log] TEST T06b dllimport-vulkan-local: FAIL System.DllNotFoundException: vulkan
+[+   453ms] [console.log] BEGIN T06c
+[+   453ms] [console.log] INFO T06c SetDllImportResolver(Brutal.Vulkan, ...) -> ok
+[+   453ms] [console.log] INFO T06c vkEnumerateInstanceVersion after resolver -> EX System.EntryPointNotFoundException: vkEnumerateInstanceVersion; resolverCalls=1 names=[vulkan;]
+[+   453ms] [console.log] TEST T06c brutal-libraryimport-vkEnumerateInstanceVersion: FAIL System.DllNotFoundException: vulkan
+[+   453ms] [console.log] BEGIN T06d
+[+   453ms] [console.log] TEST T06d dllimport-known-native-SystemNative_GetPid: FAIL System.EntryPointNotFoundException: SystemNative_GetPid
+[+   453ms] [console.log] BEGIN T07a
+[+   454ms] [console.log] TEST T07a fnptr-ldftn-value (no call): PASS &AddUco=0x0 &MyGetInstanceProcAddr=0x0 &Mixed=0x0 (wasm function-table indices; 0 would mean no native-to-interp thunk)
+[+   454ms] [console.log] BEGIN T08c
+[+   457ms] [console.log] TEST T08c fnptr-js-addFunction: PASS Module.addFunction -> table index 10611; C# calli unmanaged[Cdecl] f(2,3)=302
+[+   457ms] [console.log] BEGIN T08d
+[+   460ms] [console.log] TEST T08d brutal-FunctionTable-from-JS-gipa (JS ICD): PASS JS gipa idx=10613; BRUTAL VkInstance.FunctionTable filled from JS; vkEnumeratePhysicalDevices (JS) -> Success/Success count=1 pd=0x7EB6; jsGipaCalls=105 distinctNames=105 jsEnumCalls=2
+[+   460ms] [console.log] BEGIN T08e
+[+   461ms] [console.log] TEST T08e fnptr-js-trampoline-to-JSExport (managed ICD via JS hop): PASS gipa trampoline idx=10614, enumPD trampoline idx=10615; BRUTAL FunctionTable ctor -> 105 managed gipa lookups (re-entrant C#->JS->C#); vkEnumeratePhysicalDevices -> Success/Success count=1 pd=0xBEEF
+[+   461ms] [console.log] BEGIN T11a
+[+   461ms] [console.log] TEST T11a jsimport-hasWebGpu: PASS navigator.gpu present=True
+[+   461ms] [console.log] BEGIN T11b
+[+   461ms] [console.log] TEST T11b jsimport-span-memoryview: PASS SumBytes(Span<byte>[256]) = 32640 (expected 32640)
+[+   461ms] [console.log] BEGIN T11c
+[+   463ms] [console.log] TEST T11c jsimport-raw-pointer-heap: PASS SumPtr(0x1837070, 1000) via runtime.localHeapViewU8() = 126516 (expected 126516)
+[+   463ms] [console.log] BEGIN T11d
+[+   464ms] [console.log] TEST T11d jsimport-heap-api-survey: PASS runtime.localHeapViewU8=function runtime.getHeapU8=function runtime.setHeapI32=function Module.HEAPU8=object Module.wasmExports=object Module.wasmExports.memory=[object WebAssembly.Memory] Module.wasmMemory=undefined Module.addFunction=function Module.UTF8ToString=function Module._malloc=function heapBytes=299499520 SharedArrayBuffer-backed=false crossOriginIsolated=false wasmEnableSIMD=true wasmEnableThreads=false wasmEnableEH=true
+[+   464ms] [console.log] BEGIN T11e
+[+   468ms] [console.log] TEST T11e jsimport-async-webgpu-adapter: PASS adapter vendor='apple' architecture='metal-3' device='' description='' features=23 maxBufferSize=4294967292
+[+   468ms] [console.log] BEGIN T13a
+[+   477ms] [console.log] TEST T13a perf-direct-static-call: PASS direct static call: 8.5 ns/call (total 8 ms, acc=500000500000)
+[+   477ms] [console.log] BEGIN T13f
+[+   489ms] [console.log] TEST T13f perf-managed-fnptr (delegate*<int,int,int>): PASS delegate*<int,int,int> (managed calli) -> C# static: 11.4 ns/call (total 11 ms, acc=500000500000)
+[+   489ms] [console.log] BEGIN T13b2
+[+   517ms] [console.log] TEST T13b2 perf-fnptr-to-JS-addFunction: PASS delegate* unmanaged[Cdecl] -> JS addFunction (a+b*100): 25.6 ns/call (total 26 ms, acc=500099500000)
+[+   517ms] [console.log] BEGIN T13b3
+[+   766ms] [console.log] TEST T13b3 perf-fnptr-to-JS-trampoline-to-JSExport: PASS delegate* unmanaged[Cdecl] -> JS trampoline -> [JSExport] C#: 241.9 ns/call (total 242 ms, acc=500000500000)
+[+   766ms] [console.log] BEGIN T13c
+[+   900ms] [console.log] TEST T13c perf-jsimport-int: PASS JSImport int->int: 128.0 ns/call (total 128 ms, acc=499999500000)
+[+   900ms] [console.log] BEGIN T13d
+[+  1071ms] [console.log] TEST T13d perf-jsimport-span64: PASS JSImport Span<byte>[64] as MemoryView (JS reads .byteLength): 164.6 ns/call (total 165 ms, acc=64000000)
+[+  1071ms] [console.log] BEGIN T13d2
+[+  1127ms] [console.log] TEST T13d2 perf-jsimport-span64-copy: PASS JSImport Span<byte>[64] as MemoryView (JS .slice() copy + sum), 100k iters: 455.0 ns/call (total 46 ms, acc=6400000)
+[+  1127ms] [console.log] SMOKE MAIN DONE pass=24 fail=6 (T12 runs from JS rAF after Main returns)
+[+  1128ms] [console.log] HOST runMain resolved: exitCode=0 after 825 ms
+[+  1336ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 202.6 ns/call (total 203 ms, acc=500000500000)
+[+  1474ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=1029.1ms last=1179.1ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  1474ms] [console.log] TICKS DONE
+[+  1474ms] [driver] single finished: TICKS DONE

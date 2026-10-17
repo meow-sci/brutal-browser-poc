@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- bundler-compatible build output without Hot Reload deps (documented for .NET 10) -->
+    <WasmEnableHotReload>false</WasmEnableHotReload>
+    <WasmBundlerFriendlyBootConfig Condition="'$(BundlerFriendly)' == 'true'">true</WasmBundlerFriendlyBootConfig>
+  </PropertyGroup>
+</Project>

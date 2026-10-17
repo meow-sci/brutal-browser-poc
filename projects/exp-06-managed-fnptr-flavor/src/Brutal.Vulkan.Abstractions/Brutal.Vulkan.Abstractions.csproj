@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    exp-06: Brutal.Vulkan.Abstractions rebuilt from the read-only BRUTAL source (the public repo ships no .csproj).
+    Needed for the managed flavor because the NuGet Brutal.Vulkan.Abstractions.dll was compiled against the unmanaged
+    function-pointer field types: its IL loads `method unmanaged cdecl ...` fields and does `calli unmanaged cdecl`,
+    which no longer bind (MissingFieldException) / mean something else against a managed-flavor Brutal.Vulkan.
+    Flavor switch and output split: see ../Directory.Build.props. Package set: GlobalUsings.cs + the 2026.10.2 nuspec.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Brutal.Vulkan.Abstractions</AssemblyName>
+    <RootNamespace>Brutal.VulkanApi.Abstractions</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>2026.10.2.0</FileVersion>
+    <InformationalVersion>2026.10.2-exp06-$(BrutalFlavor)-fnptr+BRUTAL.a25cdf8</InformationalVersion>
+    <Company>Ahwoo Limited</Company>
+    <Product>Brutal.Vulkan.Abstractions</Product>
+
+    <BrutalAnalyzers Condition="'$(BrutalAnalyzers)' == ''">true</BrutalAnalyzers>
+    <BrutalAbstractionsSrc>$(BrutalSourceRoot)/Brutal.Vulkan.Abstractions</BrutalAbstractionsSrc>
+    <BrutalTransformSource>$(BrutalAbstractionsSrc)</BrutalTransformSource>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The published assembly carries [assembly: DisableRuntimeMarshalling] as well. -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BrutalManagedFnptr)' != 'true'">
+    <Compile Include="$(BrutalAbstractionsSrc)/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Brutal.Vulkan/Brutal.Vulkan.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="$(BrutalVersion)" Condition="'$(BrutalAnalyzers)' == 'true'" />
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="$(BrutalVersion)" ExcludeAssets="analyzers" Condition="'$(BrutalAnalyzers)' != 'true'" />
+    <PackageReference Include="Ahwoo.BRUTAL.Collections" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" Version="$(BrutalLoggingVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Memory" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Strings" Version="$(BrutalVersion)" />
+    <PackageReference Include="CommunityToolkit.HighPerformance" Version="$(CommunityToolkitHighPerformanceVersion)" />
+  </ItemGroup>
+</Project>

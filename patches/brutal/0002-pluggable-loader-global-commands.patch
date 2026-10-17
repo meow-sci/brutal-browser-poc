@@ -1,0 +1,38 @@
+--- a/Brutal.Vulkan/Generated/PInvoke/VulkanApi/VulkanApiEx.gen.cs
++++ b/Brutal.Vulkan/Generated/PInvoke/VulkanApi/VulkanApiEx.gen.cs
+@@ -26,7 +26,7 @@
+             fixed (VkInstanceCreateInfo* pCreateInfoFixed = &pCreateInfo)
+             {
+                 VkInstance pInstanceLocal = default;
+-                VkResult result = Vulkan.PInvoke.vkCreateInstance(pCreateInfoFixed, pAllocator, &pInstanceLocal);
++                VkResult result = Vulkan.GlobalCommands.vkCreateInstance(pCreateInfoFixed, pAllocator, &pInstanceLocal);
+                 switch (result)
+                 {
+                     case VkResult.ErrorOutOfHostMemory:
+@@ -104,7 +104,7 @@
+             fixed (byte* pLayerNameFixed = pLayerName)
+             fixed (int* pPropertyCountFixed = &pPropertyCount)
+             {
+-                VkResult result = Vulkan.PInvoke.vkEnumerateInstanceExtensionProperties(
++                VkResult result = Vulkan.GlobalCommands.vkEnumerateInstanceExtensionProperties(
+                     pLayerNameFixed,
+                     pPropertyCountFixed,
+                     pPropertiesFixed
+@@ -190,7 +190,7 @@
+             fixed (VkLayerProperties* pPropertiesFixed = pProperties)
+             fixed (int* pPropertyCountFixed = &pPropertyCount)
+             {
+-                VkResult result = Vulkan.PInvoke.vkEnumerateInstanceLayerProperties(
++                VkResult result = Vulkan.GlobalCommands.vkEnumerateInstanceLayerProperties(
+                     pPropertyCountFixed,
+                     pPropertiesFixed
+                 );
+@@ -263,7 +263,7 @@
+         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+         public static unsafe void EnumerateInstanceVersion(int* pApiVersion)
+         {
+-            VkResult result = Vulkan.PInvoke.vkEnumerateInstanceVersion(pApiVersion);
++            VkResult result = Vulkan.GlobalCommands.vkEnumerateInstanceVersion(pApiVersion);
+             switch (result)
+             {
+                 case VkResult.ErrorOutOfHostMemory:

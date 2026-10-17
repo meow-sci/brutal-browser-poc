@@ -1,0 +1,25 @@
+<Project>
+  <!--
+    Managed function-pointer flavor: before compiling, copy $(BrutalTransformSource)/**/*.cs (minus
+    @(BrutalTransformExclude), the files carried as patched copies) to $(BrutalGeneratedDir)src/ with the textual
+    rules of tools/transform.py, and compile those copies instead of the originals. The script writes only files whose
+    content changed, so incremental builds stay incremental. It fails the build if any `delegate* unmanaged` survives.
+  -->
+  <PropertyGroup Condition="'$(BrutalManagedFnptr)' == 'true'">
+    <DefineConstants>$(DefineConstants);BRUTAL_MANAGED_FNPTR</DefineConstants>
+  </PropertyGroup>
+
+  <Target Name="BrutalManagedFnptrTransform" BeforeTargets="BeforeCompile" Condition="'$(BrutalManagedFnptr)' == 'true'">
+    <PropertyGroup>
+      <_BrutalTransformExcludes>@(BrutalTransformExclude)</_BrutalTransformExcludes>
+      <_BrutalTransformArgs>--src &quot;$(BrutalTransformSource)&quot; --out &quot;$(BrutalGeneratedDir)src&quot; --report &quot;$(BrutalGeneratedDir)transform-report.txt&quot;</_BrutalTransformArgs>
+      <_BrutalTransformArgs Condition="'$(_BrutalTransformExcludes)' != ''">$(_BrutalTransformArgs) --exclude &quot;$(_BrutalTransformExcludes)&quot;</_BrutalTransformArgs>
+      <_BrutalTransformArgs Condition="'$(BrutalStripUco)' == 'false'">$(_BrutalTransformArgs) --no-strip-uco</_BrutalTransformArgs>
+    </PropertyGroup>
+    <Exec Command="$(Python) -I &quot;$(Exp06Root)tools/transform.py&quot; $(_BrutalTransformArgs)" StandardOutputImportance="high" />
+    <ItemGroup>
+      <Compile Include="$(BrutalGeneratedDir)src/**/*.cs" />
+      <FileWrites Include="$(BrutalGeneratedDir)transform-report.txt" />
+    </ItemGroup>
+  </Target>
+</Project>

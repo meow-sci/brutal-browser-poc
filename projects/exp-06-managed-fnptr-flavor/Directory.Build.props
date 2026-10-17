@@ -1,0 +1,13 @@
+<Project>
+  <!-- exp-06 shared settings. The BRUTAL source checkout is READ-ONLY: unmanaged-flavor sources are compiled in place,
+       managed-flavor sources are transformed copies under src/*/obj/managed/generated/ (tools/transform.py). -->
+  <PropertyGroup>
+    <BrutalSourceRoot Condition="'$(BrutalSourceRoot)' == ''">/Users/asherwin/repos/meow-sci/BRUTAL</BrutalSourceRoot>
+    <BrutalVersion>2026.10.1</BrutalVersion>
+    <BrutalLoggingVersion>2026.10.2</BrutalLoggingVersion>
+    <BrutalVulkanVersion>2026.10.2</BrutalVulkanVersion>
+    <CommunityToolkitHighPerformanceVersion>8.4.2</CommunityToolkitHighPerformanceVersion>
+    <Exp06Root>$(MSBuildThisFileDirectory)</Exp06Root>
+    <Python Condition="'$(Python)' == ''">python3</Python>
+  </PropertyGroup>
+</Project>

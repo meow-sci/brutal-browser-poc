@@ -1,0 +1,694 @@
+[+   294ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   295ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/out/release-verbose/wwwroot
+[+   295ms] [driver] ===== probe P01: http://127.0.0.1:58338/index.html?tests=P01
+[+   370ms] [server] 404 /favicon.ico
+[+   388ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   392ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   409ms] [console.log] SMOKE START args=[start,tests=P01]
+[+   417ms] [console.log] BEGIN P01
+[+   422ms] [console.log] TEST P01 sig vii (166 BRUTAL fns, e.g. VkDestroyInstance): PASS VkDestroyInstance.Invoke(...) -> JS addFunction('vii') ok, jsCalls=1
+[+   422ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+   422ms] [console.log] HOST runMain resolved: exitCode=0 after 75 ms
+[+   571ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 140.1 ns/call (total 140 ms, acc=500000500000)
+[+   724ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=244.3ms last=394.4ms span=150.1ms (~16.68 ms/frame); runtime alive after Main returned
+[+   725ms] [console.log] TICKS DONE
+[+   725ms] [driver] probe P01 finished: TICKS DONE
+[+   730ms] [driver] ===== probe P02: http://127.0.0.1:58338/index.html?tests=P02
+[+   838ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   855ms] [console.log] SMOKE START args=[start,tests=P02]
+[+   863ms] [console.log] BEGIN P02
+[+   867ms] [console.log] TEST P02 sig viii (153 BRUTAL fns, e.g. VkGetPhysicalDeviceFormatProperties): PASS VkGetPhysicalDeviceFormatProperties.Invoke(...) -> JS addFunction('viii') ok, jsCalls=1
+[+   867ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+   868ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+  1015ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 138.3 ns/call (total 138 ms, acc=500000500000)
+[+  1167ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=236.1ms last=386.0ms span=149.9ms (~16.66 ms/frame); runtime alive after Main returned
+[+  1167ms] [console.log] TICKS DONE
+[+  1167ms] [driver] probe P02 finished: TICKS DONE
+[+  1172ms] [driver] ===== probe P03: http://127.0.0.1:58338/index.html?tests=P03
+[+  1272ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  1291ms] [console.log] SMOKE START args=[start,tests=P03]
+[+  1300ms] [console.log] BEGIN P03
+[+  1305ms] [console.log] TEST P03 sig iiiii (119 BRUTAL fns, e.g. VkCreateDevice): PASS VkCreateDevice.Invoke(...) -> JS addFunction('iiiii') ok, jsCalls=1
+[+  1305ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  1305ms] [console.log] HOST runMain resolved: exitCode=0 after 76 ms
+[+  1449ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 135.1 ns/call (total 135 ms, acc=500000500000)
+[+  1600ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.7ms last=385.7ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  1600ms] [console.log] TICKS DONE
+[+  1600ms] [driver] probe P03 finished: TICKS DONE
+[+  1605ms] [driver] ===== probe P04: http://127.0.0.1:58338/index.html?tests=P04
+[+  1705ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  1722ms] [console.log] SMOKE START args=[start,tests=P04]
+[+  1730ms] [console.log] BEGIN P04
+[+  1735ms] [console.log] TEST P04 sig iiii (100 BRUTAL fns, e.g. VkEnumeratePhysicalDevices): PASS VkEnumeratePhysicalDevices.Invoke(...) -> JS addFunction('iiii') ok, jsCalls=1
+[+  1735ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  1736ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+  1879ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 135.5 ns/call (total 136 ms, acc=500000500000)
+[+  2033ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.9ms last=386.0ms span=150.1ms (~16.68 ms/frame); runtime alive after Main returned
+[+  2034ms] [console.log] TICKS DONE
+[+  2034ms] [driver] probe P04 finished: TICKS DONE
+[+  2039ms] [driver] ===== probe P05: http://127.0.0.1:58338/index.html?tests=P05
+[+  2139ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  2155ms] [console.log] SMOKE START args=[start,tests=P05]
+[+  2164ms] [console.log] BEGIN P05
+[+  2169ms] [console.log] TEST P05 sig viiii (63 BRUTAL fns, e.g. VkGetDeviceQueue): PASS VkGetDeviceQueue.Invoke(...) -> JS addFunction('viiii') ok, jsCalls=1
+[+  2169ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  2169ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+  2314ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 136.9 ns/call (total 137 ms, acc=500000500000)
+[+  2467ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.3ms last=385.2ms span=149.9ms (~16.66 ms/frame); runtime alive after Main returned
+[+  2467ms] [console.log] TICKS DONE
+[+  2467ms] [driver] probe P05 finished: TICKS DONE
+[+  2471ms] [driver] ===== probe P06: http://127.0.0.1:58338/index.html?tests=P06
+[+  2574ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  2590ms] [console.log] SMOKE START args=[start,tests=P06]
+[+  2598ms] [console.log] BEGIN P06
+[+  2604ms] [console.log] TEST P06 sig iii (62 BRUTAL fns, e.g. VkGetInstanceProcAddr): PASS VkGetInstanceProcAddr.Invoke(...) -> JS addFunction('iii') ok, jsCalls=1
+[+  2604ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  2604ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+  2749ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 137.5 ns/call (total 138 ms, acc=500000500000)
+[+  2900ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.1ms last=385.1ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  2900ms] [console.log] TICKS DONE
+[+  2900ms] [driver] probe P06 finished: TICKS DONE
+[+  2905ms] [driver] ===== probe P07: http://127.0.0.1:58338/index.html?tests=P07
+[+  3004ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  3020ms] [console.log] SMOKE START args=[start,tests=P07]
+[+  3030ms] [console.log] BEGIN P07
+[+  3035ms] [console.log] TEST P07 sig iiiiii (18 BRUTAL fns, e.g. VkWaitForFences): PASS VkWaitForFences.Invoke(...) -> JS addFunction('iiiiii') ok, jsCalls=1
+[+  3035ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  3035ms] [console.log] HOST runMain resolved: exitCode=0 after 74 ms
+[+  3179ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 135.7 ns/call (total 136 ms, acc=500000500000)
+[+  3332ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=237.0ms last=387.0ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  3332ms] [console.log] TICKS DONE
+[+  3332ms] [driver] probe P07 finished: TICKS DONE
+[+  3336ms] [driver] ===== probe P08: http://127.0.0.1:58338/index.html?tests=P08
+[+  3434ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  3452ms] [console.log] SMOKE START args=[start,tests=P08]
+[+  3460ms] [console.log] BEGIN P08
+[+  3464ms] [console.log] TEST P08 sig viiiiii (17 BRUTAL fns, e.g. VkCmdCopyBufferToImage): PASS VkCmdCopyBufferToImage.Invoke(...) -> JS addFunction('viiiiii') ok, jsCalls=1
+[+  3464ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  3465ms] [console.log] HOST runMain resolved: exitCode=0 after 72 ms
+[+  3609ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 135.7 ns/call (total 136 ms, acc=500000500000)
+[+  3757ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=231.3ms last=381.4ms span=150.1ms (~16.68 ms/frame); runtime alive after Main returned
+[+  3757ms] [console.log] TICKS DONE
+[+  3757ms] [driver] probe P08 finished: TICKS DONE
+[+  3765ms] [driver] ===== probe P09: http://127.0.0.1:58338/index.html?tests=P09
+[+  3865ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  3880ms] [console.log] SMOKE START args=[start,tests=P09]
+[+  3889ms] [console.log] BEGIN P09
+[+  3894ms] [console.log] TEST P09 sig viiiii (16 BRUTAL fns, e.g. VkCmdCopyBuffer): PASS VkCmdCopyBuffer.Invoke(...) -> JS addFunction('viiiii') ok, jsCalls=1
+[+  3894ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  3894ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+  4042ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 139.8 ns/call (total 140 ms, acc=500000500000)
+[+  4191ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.6ms last=385.6ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  4191ms] [console.log] TICKS DONE
+[+  4191ms] [driver] probe P09 finished: TICKS DONE
+[+  4195ms] [driver] ===== probe P10: http://127.0.0.1:58338/index.html?tests=P10
+[+  4295ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  4311ms] [console.log] SMOKE START args=[start,tests=P10]
+[+  4320ms] [console.log] BEGIN P10
+[+  4325ms] [console.log] TEST P10 sig vi (12 BRUTAL fns, e.g. VkCmdEndRenderPass): PASS VkCmdEndRenderPass.Invoke(...) -> JS addFunction('vi') ok, jsCalls=1
+[+  4325ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  4325ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+  4471ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 138.2 ns/call (total 138 ms, acc=500000500000)
+[+  4626ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=237.4ms last=386.6ms span=149.2ms (~16.58 ms/frame); runtime alive after Main returned
+[+  4626ms] [console.log] TICKS DONE
+[+  4626ms] [driver] probe P10 finished: TICKS DONE
+[+  4631ms] [driver] ===== probe P11: http://127.0.0.1:58338/index.html?tests=P11
+[+  4732ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  4749ms] [console.log] SMOKE START args=[start,tests=P11]
+[+  4758ms] [console.log] BEGIN P11
+[+  4762ms] [console.log] TEST P11 sig viiiiiii (9 BRUTAL fns, e.g. VkCmdCopyImage): PASS VkCmdCopyImage.Invoke(...) -> JS addFunction('viiiiiii') ok, jsCalls=1
+[+  4762ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  4762ms] [console.log] HOST runMain resolved: exitCode=0 after 72 ms
+[+  4908ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 136.7 ns/call (total 137 ms, acc=500000500000)
+[+  5058ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=233.4ms last=383.4ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  5058ms] [console.log] TICKS DONE
+[+  5058ms] [driver] probe P11 finished: TICKS DONE
+[+  5063ms] [driver] ===== probe P12: http://127.0.0.1:58338/index.html?tests=P12
+[+  5165ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  5181ms] [console.log] SMOKE START args=[start,tests=P12]
+[+  5190ms] [console.log] BEGIN P12
+[+  5195ms] [console.log] TEST P12 sig iiiiiii (9 BRUTAL fns, e.g. VkCreateComputePipelines): PASS VkCreateComputePipelines.Invoke(...) -> JS addFunction('iiiiiii') ok, jsCalls=1
+[+  5195ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  5195ms] [console.log] HOST runMain resolved: exitCode=0 after 74 ms
+[+  5340ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 136.5 ns/call (total 137 ms, acc=500000500000)
+[+  5493ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.5ms last=385.5ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  5493ms] [console.log] TICKS DONE
+[+  5493ms] [driver] probe P12 finished: TICKS DONE
+[+  5500ms] [driver] ===== probe P13: http://127.0.0.1:58338/index.html?tests=P13
+[+  5599ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  5616ms] [console.log] SMOKE START args=[start,tests=P13]
+[+  5624ms] [console.log] BEGIN P13
+[+  5628ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+  5628ms] [pageerror] ExitStatus: ExitStatus
+[+  7629ms] [driver] probe P13 finished: CRASH (attributed to P13)
+[+  7632ms] [driver] ===== probe P14: http://127.0.0.1:58338/index.html?tests=P14
+[+  7733ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  7750ms] [console.log] SMOKE START args=[start,tests=P14]
+[+  7759ms] [console.log] BEGIN P14
+[+  7763ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+  7763ms] [pageerror] ExitStatus: ExitStatus
+[+  9765ms] [driver] probe P14 finished: CRASH (attributed to P14)
+[+  9779ms] [driver] ===== probe P15: http://127.0.0.1:58338/index.html?tests=P15
+[+  9891ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+  9908ms] [console.log] SMOKE START args=[start,tests=P15]
+[+  9916ms] [console.log] BEGIN P15
+[+  9921ms] [console.log] TEST P15 sig iiiiiiii (5 BRUTAL fns, e.g. VkGetPhysicalDeviceImageFormatProperties): PASS VkGetPhysicalDeviceImageFormatProperties.Invoke(...) -> JS addFunction('iiiiiiii') ok, jsCalls=1
+[+  9921ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+  9921ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+ 10068ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 138.2 ns/call (total 138 ms, acc=500000500000)
+[+ 10217ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.7ms last=385.6ms span=149.9ms (~16.66 ms/frame); runtime alive after Main returned
+[+ 10217ms] [console.log] TICKS DONE
+[+ 10217ms] [driver] probe P15 finished: TICKS DONE
+[+ 10222ms] [driver] ===== probe P16: http://127.0.0.1:58338/index.html?tests=P16
+[+ 10328ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 10345ms] [console.log] SMOKE START args=[start,tests=P16]
+[+ 10354ms] [console.log] BEGIN P16
+[+ 10357ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 10357ms] [pageerror] ExitStatus: ExitStatus
+[+ 12359ms] [driver] probe P16 finished: CRASH (attributed to P16)
+[+ 12367ms] [driver] ===== probe P17: http://127.0.0.1:58338/index.html?tests=P17
+[+ 12477ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 12494ms] [console.log] SMOKE START args=[start,tests=P17]
+[+ 12503ms] [console.log] BEGIN P17
+[+ 12506ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 12507ms] [pageerror] ExitStatus: ExitStatus
+[+ 14506ms] [driver] probe P17 finished: CRASH (attributed to P17)
+[+ 14520ms] [driver] ===== probe P18: http://127.0.0.1:58338/index.html?tests=P18
+[+ 14632ms] [console.log] HOST runtime created in 47 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 14648ms] [console.log] SMOKE START args=[start,tests=P18]
+[+ 14656ms] [console.log] BEGIN P18
+[+ 14659ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 14659ms] [pageerror] ExitStatus: ExitStatus
+[+ 16660ms] [driver] probe P18 finished: CRASH (attributed to P18)
+[+ 16672ms] [driver] ===== probe P19: http://127.0.0.1:58338/index.html?tests=P19
+[+ 16780ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 16798ms] [console.log] SMOKE START args=[start,tests=P19]
+[+ 16806ms] [console.log] BEGIN P19
+[+ 16809ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 16810ms] [pageerror] ExitStatus: ExitStatus
+[+ 18811ms] [driver] probe P19 finished: CRASH (attributed to P19)
+[+ 18824ms] [driver] ===== probe P20: http://127.0.0.1:58338/index.html?tests=P20
+[+ 18933ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 18949ms] [console.log] SMOKE START args=[start,tests=P20]
+[+ 18957ms] [console.log] BEGIN P20
+[+ 18962ms] [console.log] TEST P20 sig ii (3 BRUTAL fns, e.g. VkQueueWaitIdle): PASS VkQueueWaitIdle.Invoke(...) -> JS addFunction('ii') ok, jsCalls=1
+[+ 18962ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+ 18963ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+ 19107ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 136.7 ns/call (total 137 ms, acc=500000500000)
+[+ 19258ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=235.1ms last=385.1ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+ 19258ms] [console.log] TICKS DONE
+[+ 19258ms] [driver] probe P20 finished: TICKS DONE
+[+ 19266ms] [driver] ===== probe P21: http://127.0.0.1:58338/index.html?tests=P21
+[+ 19365ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 19383ms] [console.log] SMOKE START args=[start,tests=P21]
+[+ 19391ms] [console.log] BEGIN P21
+[+ 19395ms] [pageerror] RuntimeError: function signature mismatch
+    at $func298 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:129023)
+    at $func222 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:117402)
+    at $func213 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:60393)
+    at $func256 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:121206)
+    at $func3231 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:989138)
+    at $func2553 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:815252)
+    at $func2552 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:815140)
+    at $func1907 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:659170)
+    at $func298 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:129053)
+    at $func222 (http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:1:117402)
+[+ 21396ms] [driver] probe P21 finished: CRASH (attributed to P21)
+[+ 21404ms] [driver] ===== probe P22: http://127.0.0.1:58338/index.html?tests=P22
+[+ 21510ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 21528ms] [console.log] SMOKE START args=[start,tests=P22]
+[+ 21536ms] [console.log] BEGIN P22
+[+ 21541ms] [console.log] TEST P22 sig iiiij (2 BRUTAL fns, e.g. VkBindBufferMemory): PASS VkBindBufferMemory.Invoke(...) -> JS addFunction('iiiij') ok, jsCalls=1
+[+ 21541ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+ 21541ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+ 21687ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 137.4 ns/call (total 137 ms, acc=500000500000)
+[+ 21842ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=239.7ms last=389.8ms span=150.1ms (~16.68 ms/frame); runtime alive after Main returned
+[+ 21842ms] [console.log] TICKS DONE
+[+ 21842ms] [driver] probe P22 finished: TICKS DONE
+[+ 21847ms] [driver] ===== probe P23: http://127.0.0.1:58338/index.html?tests=P23
+[+ 21948ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 21965ms] [console.log] SMOKE START args=[start,tests=P23]
+[+ 21973ms] [console.log] BEGIN P23
+[+ 21976ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 21976ms] [pageerror] ExitStatus: ExitStatus
+[+ 23978ms] [driver] probe P23 finished: CRASH (attributed to P23)
+[+ 23990ms] [driver] ===== probe P24: http://127.0.0.1:58338/index.html?tests=P24
+[+ 24099ms] [console.log] HOST runtime created in 47 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 24116ms] [console.log] SMOKE START args=[start,tests=P24]
+[+ 24124ms] [console.log] BEGIN P24
+[+ 24128ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 24128ms] [pageerror] ExitStatus: ExitStatus
+[+ 26129ms] [driver] probe P24 finished: CRASH (attributed to P24)
+[+ 26141ms] [driver] ===== probe P25: http://127.0.0.1:58338/index.html?tests=P25
+[+ 26251ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 26269ms] [console.log] SMOKE START args=[start,tests=P25]
+[+ 26279ms] [console.log] BEGIN P25
+[+ 26284ms] [console.log] TEST P25 sig iiiiiiiii (2 BRUTAL fns, e.g. VkGetPhysicalDeviceExternalImageFormatPropertiesNV): PASS VkGetPhysicalDeviceExternalImageFormatPropertiesNV.Invoke(...) -> JS addFunction('iiiiiiiii') ok, jsCalls=1
+[+ 26284ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+ 26285ms] [console.log] HOST runMain resolved: exitCode=0 after 77 ms
+[+ 26430ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 137.2 ns/call (total 137 ms, acc=500000500000)
+[+ 26583ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=242.4ms last=392.0ms span=149.6ms (~16.62 ms/frame); runtime alive after Main returned
+[+ 26583ms] [console.log] TICKS DONE
+[+ 26583ms] [driver] probe P25 finished: TICKS DONE
+[+ 26591ms] [driver] ===== probe P26: http://127.0.0.1:58338/index.html?tests=P26
+[+ 26705ms] [console.log] HOST runtime created in 45 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 26720ms] [console.log] SMOKE START args=[start,tests=P26]
+[+ 26729ms] [console.log] BEGIN P26
+[+ 26733ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 26733ms] [pageerror] ExitStatus: ExitStatus
+[+ 28735ms] [driver] probe P26 finished: CRASH (attributed to P26)
+[+ 28745ms] [driver] ===== probe P27: http://127.0.0.1:58338/index.html?tests=P27
+[+ 28854ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 28871ms] [console.log] SMOKE START args=[start,tests=P27]
+[+ 28880ms] [console.log] BEGIN P27
+[+ 28883ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 28884ms] [pageerror] ExitStatus: ExitStatus
+[+ 30885ms] [driver] probe P27 finished: CRASH (attributed to P27)
+[+ 30897ms] [driver] ===== probe P28: http://127.0.0.1:58338/index.html?tests=P28
+[+ 31007ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 31024ms] [console.log] SMOKE START args=[start,tests=P28]
+[+ 31032ms] [console.log] BEGIN P28
+[+ 31036ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 31036ms] [pageerror] ExitStatus: ExitStatus
+[+ 33037ms] [driver] probe P28 finished: CRASH (attributed to P28)
+[+ 33042ms] [driver] ===== probe P29: http://127.0.0.1:58338/index.html?tests=P29
+[+ 33144ms] [console.log] HOST runtime created in 40 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 33161ms] [console.log] SMOKE START args=[start,tests=P29]
+[+ 33170ms] [console.log] BEGIN P29
+[+ 33174ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 33174ms] [pageerror] ExitStatus: ExitStatus
+[+ 35174ms] [driver] probe P29 finished: CRASH (attributed to P29)
+[+ 35178ms] [driver] ===== probe P30: http://127.0.0.1:58338/index.html?tests=P30
+[+ 35281ms] [console.log] HOST runtime created in 44 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 35299ms] [console.log] SMOKE START args=[start,tests=P30]
+[+ 35308ms] [console.log] BEGIN P30
+[+ 35312ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 35312ms] [pageerror] ExitStatus: ExitStatus
+[+ 37314ms] [driver] probe P30 finished: CRASH (attributed to P30)
+[+ 37318ms] [driver] ===== probe P31: http://127.0.0.1:58338/index.html?tests=P31
+[+ 37419ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 37436ms] [console.log] SMOKE START args=[start,tests=P31]
+[+ 37444ms] [console.log] BEGIN P31
+[+ 37447ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 37447ms] [pageerror] ExitStatus: ExitStatus
+[+ 39448ms] [driver] probe P31 finished: CRASH (attributed to P31)
+[+ 39452ms] [driver] ===== probe P32: http://127.0.0.1:58338/index.html?tests=P32
+[+ 39548ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 39565ms] [console.log] SMOKE START args=[start,tests=P32]
+[+ 39573ms] [console.log] BEGIN P32
+[+ 39577ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 39577ms] [pageerror] ExitStatus: ExitStatus
+[+ 41578ms] [driver] probe P32 finished: CRASH (attributed to P32)
+[+ 41588ms] [driver] ===== probe P33: http://127.0.0.1:58338/index.html?tests=P33
+[+ 41699ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 41716ms] [console.log] SMOKE START args=[start,tests=P33]
+[+ 41724ms] [console.log] BEGIN P33
+[+ 41728ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 41728ms] [pageerror] ExitStatus: ExitStatus
+[+ 43730ms] [driver] probe P33 finished: CRASH (attributed to P33)
+[+ 43739ms] [driver] ===== probe P34: http://127.0.0.1:58338/index.html?tests=P34
+[+ 43848ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 43865ms] [console.log] SMOKE START args=[start,tests=P34]
+[+ 43874ms] [console.log] BEGIN P34
+[+ 43878ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 43878ms] [pageerror] ExitStatus: ExitStatus
+[+ 45879ms] [driver] probe P34 finished: CRASH (attributed to P34)
+[+ 45889ms] [driver] ===== probe P35: http://127.0.0.1:58338/index.html?tests=P35
+[+ 45999ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 46017ms] [console.log] SMOKE START args=[start,tests=P35]
+[+ 46025ms] [console.log] BEGIN P35
+[+ 46029ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 46029ms] [pageerror] ExitStatus: ExitStatus
+[+ 48030ms] [driver] probe P35 finished: CRASH (attributed to P35)
+[+ 48040ms] [driver] ===== probe P36: http://127.0.0.1:58338/index.html?tests=P36
+[+ 48152ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 48168ms] [console.log] SMOKE START args=[start,tests=P36]
+[+ 48176ms] [console.log] BEGIN P36
+[+ 48180ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 48180ms] [pageerror] ExitStatus: ExitStatus
+[+ 50182ms] [driver] probe P36 finished: CRASH (attributed to P36)
+[+ 50189ms] [driver] ===== probe P37: http://127.0.0.1:58338/index.html?tests=P37
+[+ 50300ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 50317ms] [console.log] SMOKE START args=[start,tests=P37]
+[+ 50325ms] [console.log] BEGIN P37
+[+ 50329ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 50329ms] [pageerror] ExitStatus: ExitStatus
+[+ 52330ms] [driver] probe P37 finished: CRASH (attributed to P37)
+[+ 52336ms] [driver] ===== probe P38: http://127.0.0.1:58338/index.html?tests=P38
+[+ 52441ms] [console.log] HOST runtime created in 46 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 52458ms] [console.log] SMOKE START args=[start,tests=P38]
+[+ 52466ms] [console.log] BEGIN P38
+[+ 52470ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 52470ms] [pageerror] ExitStatus: ExitStatus
+[+ 54472ms] [driver] probe P38 finished: CRASH (attributed to P38)
+[+ 54476ms] [driver] ===== probe P39: http://127.0.0.1:58338/index.html?tests=P39
+[+ 54574ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 54591ms] [console.log] SMOKE START args=[start,tests=P39]
+[+ 54600ms] [console.log] BEGIN P39
+[+ 54604ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 54604ms] [pageerror] ExitStatus: ExitStatus
+[+ 56606ms] [driver] probe P39 finished: CRASH (attributed to P39)
+[+ 56620ms] [driver] ===== probe P40: http://127.0.0.1:58338/index.html?tests=P40
+[+ 56729ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 56746ms] [console.log] SMOKE START args=[start,tests=P40]
+[+ 56754ms] [console.log] BEGIN P40
+[+ 56758ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 56758ms] [pageerror] ExitStatus: ExitStatus
+[+ 58759ms] [driver] probe P40 finished: CRASH (attributed to P40)
+[+ 58769ms] [driver] ===== probe P41: http://127.0.0.1:58338/index.html?tests=P41
+[+ 58879ms] [console.log] HOST runtime created in 47 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 58897ms] [console.log] SMOKE START args=[start,tests=P41]
+[+ 58905ms] [console.log] BEGIN P41
+[+ 58909ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 58909ms] [pageerror] ExitStatus: ExitStatus
+[+ 60910ms] [driver] probe P41 finished: CRASH (attributed to P41)
+[+ 60914ms] [driver] ===== probe P42: http://127.0.0.1:58338/index.html?tests=P42
+[+ 61014ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 61032ms] [console.log] SMOKE START args=[start,tests=P42]
+[+ 61041ms] [console.log] BEGIN P42
+[+ 61044ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 61044ms] [pageerror] ExitStatus: ExitStatus
+[+ 63044ms] [driver] probe P42 finished: CRASH (attributed to P42)
+[+ 63053ms] [driver] ===== probe P43: http://127.0.0.1:58338/index.html?tests=P43
+[+ 63164ms] [console.log] HOST runtime created in 41 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 63181ms] [console.log] SMOKE START args=[start,tests=P43]
+[+ 63189ms] [console.log] BEGIN P43
+[+ 63192ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 63192ms] [pageerror] ExitStatus: ExitStatus
+[+ 65194ms] [driver] probe P43 finished: CRASH (attributed to P43)
+[+ 65208ms] [driver] ===== probe P44: http://127.0.0.1:58338/index.html?tests=P44
+[+ 65318ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 65335ms] [console.log] SMOKE START args=[start,tests=P44]
+[+ 65344ms] [console.log] BEGIN P44
+[+ 65348ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58338/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58338/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+ 65348ms] [pageerror] ExitStatus: ExitStatus
+[+ 67350ms] [driver] probe P44 finished: CRASH (attributed to P44)
+[+ 67354ms] [driver] ===== probe P45: http://127.0.0.1:58338/index.html?tests=P45
+[+ 67452ms] [console.log] HOST runtime created in 42 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+ 67469ms] [console.log] SMOKE START args=[start,tests=P45]
+[+ 67478ms] [console.log] BEGIN P45
+[+ 67482ms] [console.log] TEST P45 sig v (1 BRUTAL fns, e.g. PfnVkVoidFunction): PASS PfnVkVoidFunction.Invoke(...) -> JS addFunction('v') ok, jsCalls=1
+[+ 67482ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+ 67482ms] [console.log] HOST runMain resolved: exitCode=0 after 73 ms
+[+ 67634ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 143.3 ns/call (total 143 ms, acc=500000500000)
+[+ 67784ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=242.3ms last=392.4ms span=150.1ms (~16.68 ms/frame); runtime alive after Main returned
+[+ 67784ms] [console.log] TICKS DONE
+[+ 67784ms] [driver] probe P45 finished: TICKS DONE
+[+ 67788ms] [driver] probe summary: P01=ran P02=ran P03=ran P04=ran P05=ran P06=ran P07=ran P08=ran P09=ran P10=ran P11=ran P12=ran P13=CRASH P14=CRASH P15=ran P16=CRASH P17=CRASH P18=CRASH P19=CRASH P20=ran P21=CRASH P22=ran P23=CRASH P24=CRASH P25=ran P26=CRASH P27=CRASH P28=CRASH P29=CRASH P30=CRASH P31=CRASH P32=CRASH P33=CRASH P34=CRASH P35=CRASH P36=CRASH P37=CRASH P38=CRASH P39=CRASH P40=CRASH P41=CRASH P42=CRASH P43=CRASH P44=CRASH P45=ran

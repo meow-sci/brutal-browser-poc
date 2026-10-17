@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    exp-06: Brutal.Vulkan rebuilt from the read-only BRUTAL source (project reconstructed in exp-04), with the exp-04
+    pluggable-loader patch (Patched/), in two flavors selected by $(BrutalManagedFnptr) (see ../Directory.Build.props):
+      false  upstream sources compiled in place  -> delegate* unmanaged[Cdecl]<...>   (desktop native / UCO ICDs)
+      true   transformed copies (tools/transform.py) + BRUTAL_MANAGED_FNPTR -> delegate*<...> (managed C# ICDs)
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Brutal.Vulkan</AssemblyName>
+    <RootNamespace>Brutal.VulkanApi</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings> <!-- required: sources use System/System.Collections.Generic without usings -->
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- Identity of the published Ahwoo.BRUTAL.Vulkan 2026.10.2 assembly (AssemblyVersion 1.0.0.0, not strong-named). -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>2026.10.2.0</FileVersion>
+    <InformationalVersion>2026.10.2-exp06-$(BrutalFlavor)-fnptr+BRUTAL.a25cdf8</InformationalVersion>
+    <Company>Ahwoo Limited</Company>
+    <Product>Brutal.Vulkan</Product>
+
+    <BrutalAnalyzers Condition="'$(BrutalAnalyzers)' == ''">true</BrutalAnalyzers>
+    <BrutalVulkanSrc>$(BrutalSourceRoot)/Brutal.Vulkan</BrutalVulkanSrc>
+    <BrutalTransformSource>$(BrutalVulkanSrc)</BrutalTransformSource>
+    <DefineConstants>$(DefineConstants);BRUTAL_VULKAN_PLUGGABLE_LOADER</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The published assembly carries [assembly: DisableRuntimeMarshalling]; no source file declares it. -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute" />
+    <!-- Upstream files replaced by the patched copies under Patched/ (paths relative to $(BrutalVulkanSrc)). -->
+    <BrutalTransformExclude Include="ImportResolver.cs;Generated/PInvoke/VulkanApi/VulkanApiEx.gen.cs" />
+  </ItemGroup>
+
+  <!-- Unmanaged flavor: upstream in place, minus the patched files. -->
+  <ItemGroup Condition="'$(BrutalManagedFnptr)' != 'true'">
+    <Compile Include="$(BrutalVulkanSrc)/**/*.cs"
+             Exclude="$(BrutalVulkanSrc)/ImportResolver.cs;$(BrutalVulkanSrc)/Generated/PInvoke/VulkanApi/VulkanApiEx.gen.cs" />
+  </ItemGroup>
+  <!-- Managed flavor: the transformed copies are added by the BrutalManagedFnptrTransform target (src/Directory.Build.targets). -->
+
+  <!-- Both flavors: the patched files (one source, #if BRUTAL_MANAGED_FNPTR inside). -->
+  <ItemGroup>
+    <Compile Include="Patched/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="$(BrutalVersion)" Condition="'$(BrutalAnalyzers)' == 'true'" />
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="$(BrutalVersion)" ExcludeAssets="analyzers" Condition="'$(BrutalAnalyzers)' != 'true'" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" Version="$(BrutalLoggingVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Memory" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Strings" Version="$(BrutalVersion)" />
+  </ItemGroup>
+</Project>

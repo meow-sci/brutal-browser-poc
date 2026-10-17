@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Brutal.Vulkan compiled from the pinned BRUTAL tree ($(BrutalSourceRoot)Brutal.Vulkan) in the browser flavor: managed
+    delegate*<...> function pointers (BrutalManagedFnptr=true, default) plus the pluggable loader patch under Patched/.
+    -p:BrutalManagedFnptr=false builds the upstream unmanaged flavor from the same sources. Mechanics: patches/brutal/BrutalSource.targets.
+  -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Vulkan</AssemblyName>
+    <RootNamespace>Brutal.VulkanApi</RootNamespace>
+
+    <!-- Identity of the published Ahwoo.BRUTAL.Vulkan 2026.10.2 assembly (AssemblyVersion 1.0.0.0, not strong-named). -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>2026.10.2.0</FileVersion>
+    <InformationalVersion>2026.10.2-browser+BRUTAL.a25cdf8</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Company>Ahwoo Limited</Company>
+    <Product>Brutal.Vulkan</Product>
+
+    <BrutalLibrary>Brutal.Vulkan</BrutalLibrary>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" />
+    <PackageReference Include="Ahwoo.BRUTAL.Memory" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" />
+    <PackageReference Include="Ahwoo.BRUTAL.Strings" />
+    <PackageReference Include="CommunityToolkit.HighPerformance" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)../../patches/brutal/BrutalSource.targets" />
+</Project>

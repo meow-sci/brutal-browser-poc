@@ -1,0 +1,4 @@
+# Verbatim copies of BRUTAL's generated GLFW enums, constants, structs and delegates (pinned commit a25cdf8): they carry no XML
+# docs and are kept byte-identical, so the missing-doc warning is off for this folder only.
+[*.cs]
+dotnet_diagnostic.CS1591.severity = none

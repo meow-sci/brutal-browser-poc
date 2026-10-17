@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Brutal.Vulkan.Abstractions compiled from the pinned BRUTAL tree in the same flavor as Brutal.Vulkan.Browser (the flavor
+    property flows to the project reference). The NuGet Abstractions assembly cannot be used with the managed flavor: its IL
+    loads `unmanaged cdecl` function-pointer fields and does `calli unmanaged cdecl`, which no longer bind (MissingFieldException).
+    Mechanics: patches/brutal/BrutalSource.targets.
+  -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Vulkan.Abstractions</AssemblyName>
+    <RootNamespace>Brutal.VulkanApi.Abstractions</RootNamespace>
+
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>2026.10.2.0</FileVersion>
+    <InformationalVersion>2026.10.2-browser+BRUTAL.a25cdf8</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Company>Ahwoo Limited</Company>
+    <Product>Brutal.Vulkan.Abstractions</Product>
+
+    <BrutalLibrary>Brutal.Vulkan.Abstractions</BrutalLibrary>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" />
+    <PackageReference Include="Ahwoo.BRUTAL.Collections" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" />
+    <PackageReference Include="Ahwoo.BRUTAL.Memory" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" />
+    <PackageReference Include="Ahwoo.BRUTAL.Strings" />
+    <PackageReference Include="CommunityToolkit.HighPerformance" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)../../patches/brutal/BrutalSource.targets" />
+</Project>

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- exp-06 regression check for the UNMANAGED flavor (BrutalManagedFnptr=false) built from the same projects:
+         mode "uco":    exp-04's [UnmanagedCallersOnly] FakeIcd + ManagedLoaderScenario (copied verbatim into shared/exp04-copy)
+         mode "native": exp-04's MoltenVK smoke (native loader branch of the patched ImportResolver, i.e. the #else path)
+       Both libraries are source-built (unmanaged flavor), including Brutal.Vulkan.Abstractions. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BrutalManagedFnptr>false</BrutalManagedFnptr>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(Exp06Root)shared/exp04-copy/*.cs" Link="shared/exp04-copy/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Exp06Root)src/Brutal.Vulkan/Brutal.Vulkan.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+    <ProjectReference Include="$(Exp06Root)src/Brutal.Vulkan.Abstractions/Brutal.Vulkan.Abstractions.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+    <!-- Only the native asset (runtimes/osx-arm64/native/libVulkanEx.dylib) for the native MoltenVK mode. -->
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan" Version="$(BrutalVulkanVersion)" ExcludeAssets="compile;runtime" />
+  </ItemGroup>
+</Project>

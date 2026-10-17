@@ -1,0 +1,15 @@
+#version 450
+// Compute shader with a write-only SSBO: spv-prepare strips NonReadable (WGSL has no write-only storage buffers).
+layout(local_size_x = 8, local_size_y = 1, local_size_z = 1) in;
+layout(set = 0, binding = 0, std430) writeonly buffer Out {
+    uvec4 values[];
+} outBuf;
+layout(set = 0, binding = 1, std140) uniform Params {
+    uvec4 base;
+} params;
+
+void main()
+{
+    uint i = gl_GlobalInvocationID.x;
+    outBuf.values[i] = params.base + uvec4(i);
+}

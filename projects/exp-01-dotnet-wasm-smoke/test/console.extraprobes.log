@@ -1,0 +1,74 @@
+[+   318ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   318ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/out/release-verbose/wwwroot
+[+   318ms] [driver] ===== single: http://127.0.0.1:58442/index.html?tests=P46
+[+   397ms] [server] 404 /favicon.ico
+[+   417ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   422ms] [console.log] HOST runtime created in 44 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   439ms] [console.log] SMOKE START args=[start,tests=P46]
+[+   448ms] [console.log] BEGIN P46
+[+   451ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58442/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58442/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+   451ms] [pageerror] ExitStatus: ExitStatus
+[+  2452ms] [driver] single finished: CRASH (attributed to P46)
+[+   287ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   287ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/out/release-verbose/wwwroot
+[+   287ms] [driver] ===== single: http://127.0.0.1:58484/index.html?tests=P47
+[+   364ms] [server] 404 /favicon.ico
+[+   384ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   389ms] [console.log] HOST runtime created in 44 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   405ms] [console.log] SMOKE START args=[start,tests=P47]
+[+   414ms] [console.log] BEGIN P47
+[+   419ms] [console.log] TEST P47 64-bit enum (VkPipelineStageFlags2 : ulong) vs JS sig viiii: PASS JS (typed viiii) received args: 0x11, 0x2, 0x33, 0x4 (sent 0x11, 0x100000002, 0x33, 4)
+[+   419ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+   420ms] [console.log] HOST runMain resolved: exitCode=0 after 77 ms
+[+   565ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 137.1 ns/call (total 137 ms, acc=500000500000)
+[+   715ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=238.9ms last=388.9ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+   715ms] [console.log] TICKS DONE
+[+   715ms] [driver] single finished: TICKS DONE
+[+   288ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   288ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/out/release-verbose/wwwroot
+[+   288ms] [driver] ===== single: http://127.0.0.1:58499/index.html?tests=P48
+[+   365ms] [server] 404 /favicon.ico
+[+   386ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   390ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   405ms] [console.log] SMOKE START args=[start,tests=P48]
+[+   413ms] [console.log] BEGIN P48
+[+   420ms] [console.log] TEST P48 i64 value correctness via ByteSize64 (VkBindBufferMemory, iiiij): PASS ret=Success; JS received args: 0x11, 0x22, 0x33, 0x123456789n (sent 0x11, 0x22, 0x33, 0x123456789)
+[+   420ms] [console.log] SMOKE MAIN DONE pass=1 fail=0 (T12 runs from JS rAF after Main returns)
+[+   421ms] [console.log] HOST runMain resolved: exitCode=0 after 77 ms
+[+   566ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 137.7 ns/call (total 138 ms, acc=500000500000)
+[+   723ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=245.1ms last=395.1ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+   723ms] [console.log] TICKS DONE
+[+   723ms] [driver] single finished: TICKS DONE
+[+   298ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   298ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/out/release-verbose/wwwroot
+[+   298ms] [driver] ===== single: http://127.0.0.1:58514/index.html?tests=P49
+[+   376ms] [server] 404 /favicon.ico
+[+   397ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   401ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   416ms] [console.log] SMOKE START args=[start,tests=P49]
+[+   425ms] [console.log] BEGIN P49
+[+   428ms] [console.error] [MONO] /__w/1/s/src/runtime/src/mono/mono/mini/aot-runtime-wasm.c:188 <disabled>
+Error
+    at Mc (http://127.0.0.1:58514/_framework/dotnet.runtime.0j6ezsi0n0.js:3:172283)
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[158]:0xac63
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[656]:0x43dbd
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[580]:0x4246d
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[582]:0x42530
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[583]:0x42563
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[213]:0xef6d
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[256]:0x1d975
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[3231]:0xf17d1
+    at http://127.0.0.1:58514/_framework/dotnet.native.muve7a13r4.wasm:wasm-function[2553]:0xc7093
+[+   428ms] [pageerror] ExitStatus: ExitStatus
+[+  2429ms] [driver] single finished: CRASH (attributed to P49)

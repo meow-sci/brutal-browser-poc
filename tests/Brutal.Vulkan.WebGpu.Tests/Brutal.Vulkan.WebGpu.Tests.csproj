@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Desktop tests of the web ICD (src/Brutal.Vulkan.WebGpu): the real Brutal.Vulkan browser-flavor bindings drive the ICD,
+    which talks to a RecordingBridge instead of WebGPU. Includes the smoke app's TriangleScene and compiles its shaders
+    (SPIR-V + WGSL manifest) through tools/Shaders.targets.
+  -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <NoWarn>$(NoWarn);BRUTALCORE0011</NoWarn>
+    <!-- also run the WGSL step (tools/build-shaders.mjs) on desktop: the tests need the manifest -->
+    <ShaderWebPipeline>true</ShaderWebPipeline>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Vulkan.Abstractions.Browser/Brutal.Vulkan.Abstractions.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Vulkan.WebGpu/Brutal.Vulkan.WebGpu.csproj" />
+    <ProjectReference Include="../../src/Brutal.Browser/Brutal.Browser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../Brutal.Vulkan.WebGpu.Smoke/TriangleScene.cs;../Brutal.Vulkan.WebGpu.Smoke/ComputeCheck.cs" LinkBase="Scene" />
+    <ShaderSource Include="../Brutal.Vulkan.WebGpu.Smoke/Shaders/tri.vert;../Brutal.Vulkan.WebGpu.Smoke/Shaders/tri.frag;../Brutal.Vulkan.WebGpu.Smoke/Shaders/fill.comp" />
+    <Using Include="Xunit" />
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>RepoRoot</_Parameter1>
+      <_Parameter2>$(RepoRoot)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <Import Project="$(RepoRoot)tools/Shaders.targets" />
+</Project>

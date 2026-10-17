@@ -1,0 +1,152 @@
+--- exp-04/ImportResolver.cs
++++ exp-06/ImportResolver.cs
+@@ -1,3 +1,24 @@
++// exp-06: same pluggable-loader patch as exp-04, written once for both function-pointer flavors.
++//   default              : Brutal.Vulkan's generated tables hold delegate* unmanaged[Cdecl]<...> (upstream).
++//   BRUTAL_MANAGED_FNPTR : tools/transform.py rewrote them to managed delegate*<...>; the supplied
++//                          vkGetInstanceProcAddr and every pointer it returns are managed function pointers
++//                          (&StaticMethod), called with a managed calli (no native transition).
++#if BRUTAL_MANAGED_FNPTR
++using unsafe GetInstanceProcAddrFn = delegate*<Brutal.VulkanApi.VkInstance, byte*, Brutal.VulkanApi.PfnVkVoidFunction>;
++using unsafe CreateInstanceFnPtr = delegate*<Brutal.VulkanApi.VkInstanceCreateInfo*, Brutal.VulkanApi.VkAllocationCallbacks*, Brutal.VulkanApi.VkInstance*, Brutal.VulkanApi.VkResult>;
++using unsafe EnumerateInstanceExtensionPropertiesFnPtr = delegate*<byte*, int*, Brutal.VulkanApi.VkExtensionProperties*, Brutal.VulkanApi.VkResult>;
++using unsafe EnumerateInstanceLayerPropertiesFnPtr = delegate*<int*, Brutal.VulkanApi.VkLayerProperties*, Brutal.VulkanApi.VkResult>;
++using unsafe EnumerateInstanceVersionFnPtr = delegate*<int*, Brutal.VulkanApi.VkResult>;
++using unsafe VoidFnPtr = delegate*<void>;
++#else
++using unsafe GetInstanceProcAddrFn = delegate* unmanaged[Cdecl]<Brutal.VulkanApi.VkInstance, byte*, Brutal.VulkanApi.PfnVkVoidFunction>;
++using unsafe CreateInstanceFnPtr = delegate* unmanaged[Cdecl]<Brutal.VulkanApi.VkInstanceCreateInfo*, Brutal.VulkanApi.VkAllocationCallbacks*, Brutal.VulkanApi.VkInstance*, Brutal.VulkanApi.VkResult>;
++using unsafe EnumerateInstanceExtensionPropertiesFnPtr = delegate* unmanaged[Cdecl]<byte*, int*, Brutal.VulkanApi.VkExtensionProperties*, Brutal.VulkanApi.VkResult>;
++using unsafe EnumerateInstanceLayerPropertiesFnPtr = delegate* unmanaged[Cdecl]<int*, Brutal.VulkanApi.VkLayerProperties*, Brutal.VulkanApi.VkResult>;
++using unsafe EnumerateInstanceVersionFnPtr = delegate* unmanaged[Cdecl]<int*, Brutal.VulkanApi.VkResult>;
++using unsafe VoidFnPtr = delegate* unmanaged[Cdecl]<void>;
++#endif
++
+ namespace Brutal.VulkanApi;
+ 
+ public partial class Vulkan
+@@ -7,13 +28,16 @@
+ 
+     // AppContext key that lets the application supply vkGetInstanceProcAddr itself instead of having a native
+     // Vulkan library loaded. Set it with AppContext.SetData before the first use of Vulkan; the value is a boxed
+-    // nint (or long/ulong) holding a delegate* unmanaged[Cdecl]<VkInstance, byte*, PfnVkVoidFunction>.
++    // nint (or long/ulong) holding a delegate* unmanaged[Cdecl]<VkInstance, byte*, PfnVkVoidFunction>, or, in the
++    // BRUTAL_MANAGED_FNPTR flavor, a managed delegate*<VkInstance, byte*, PfnVkVoidFunction> (e.g. &MyIcd.GetInstanceProcAddr).
+     // Required on browser-wasm, where there is no native loader; honoured on every platform (software ICDs,
+     // layering, tests). When it is absent the native loading below is unchanged.
+     private const string GetInstanceProcAddrKey = "BRUTAL_VULKAN_GET_INSTANCE_PROC_ADDR";
+ 
++#if !BRUTAL_MANAGED_FNPTR
+     // Cached reference to the loaded Vulkan dll
+     private static readonly nint Dll;
++#endif
+ 
+     /// <summary>
+     /// The function pointer to vkGetInstanceProcAddr, loaded from the Vulkan library.
+@@ -22,7 +46,9 @@
+ 
+     // Global commands resolved through vkGetInstanceProcAddr(NULL, ...) when the loader was supplied through
+     // AppContext; unused (null) when the native library and its LibraryImport exports are used.
++#if !BRUTAL_MANAGED_FNPTR
+     private static readonly bool UseProcAddrForGlobalCommands;
++#endif
+     private static readonly PfnVkVoidFunction CreateInstanceFn;
+     private static readonly PfnVkVoidFunction EnumerateInstanceExtensionPropertiesFn;
+     private static readonly PfnVkVoidFunction EnumerateInstanceLayerPropertiesFn;
+@@ -43,9 +69,7 @@
+         {
+             unsafe
+             {
+-                GetInstanceProcAddr = new VkGetInstanceProcAddr(
+-                    (delegate* unmanaged[Cdecl]<VkInstance, byte*, PfnVkVoidFunction>)suppliedGetInstanceProcAddr
+-                );
++                GetInstanceProcAddr = new VkGetInstanceProcAddr((GetInstanceProcAddrFn)suppliedGetInstanceProcAddr);
+                 CreateInstanceFn = GetInstanceProcAddr.Invoke(default, "vkCreateInstance"u8.AsPointer());
+                 EnumerateInstanceExtensionPropertiesFn = GetInstanceProcAddr.Invoke(
+                     default,
+@@ -60,10 +84,20 @@
+                     "vkEnumerateInstanceVersion"u8.AsPointer()
+                 );
+             }
++#if !BRUTAL_MANAGED_FNPTR
+             UseProcAddrForGlobalCommands = true;
++#endif
+             return;
+         }
+ 
++#if BRUTAL_MANAGED_FNPTR
++        // A managed function-pointer build can only talk to a managed ICD: native exports are not managed methods.
++        throw new PlatformNotSupportedException(
++            $"This Brutal.Vulkan build uses managed function pointers (BRUTAL_MANAGED_FNPTR) and has no native Vulkan "
++                + $"loader. Set AppContext data '{GetInstanceProcAddrKey}' to a managed vkGetInstanceProcAddr "
++                + "(delegate*<VkInstance, byte*, PfnVkVoidFunction>) before first using Vulkan."
++        );
++#else
+         if (OperatingSystem.IsBrowser())
+             throw new PlatformNotSupportedException(
+                 $"There is no native Vulkan library on this platform. Set AppContext data '{GetInstanceProcAddrKey}' "
+@@ -101,6 +135,7 @@
+             if (GetInstanceProcAddr.Invoke == null)
+                 throw new NullReferenceException("Failed to load vkGetInstanceProcAddr from Vulkan library");
+         }
++#endif
+     }
+ 
+     /// <summary>
+@@ -117,9 +152,11 @@
+             VkInstance* pInstance
+         )
+         {
++#if !BRUTAL_MANAGED_FNPTR
+             if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                 return PInvoke.vkCreateInstance(pCreateInfo, pAllocator, pInstance);
+-            return ((delegate* unmanaged[Cdecl]<VkInstanceCreateInfo*, VkAllocationCallbacks*, VkInstance*, VkResult>)
++#endif
++            return ((CreateInstanceFnPtr)
+                 Resolved(CreateInstanceFn, "vkCreateInstance"))(pCreateInfo, pAllocator, pInstance);
+         }
+ 
+@@ -130,9 +167,11 @@
+             VkExtensionProperties* pProperties
+         )
+         {
++#if !BRUTAL_MANAGED_FNPTR
+             if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                 return PInvoke.vkEnumerateInstanceExtensionProperties(pLayerName, pPropertyCount, pProperties);
+-            return ((delegate* unmanaged[Cdecl]<byte*, int*, VkExtensionProperties*, VkResult>)
++#endif
++            return ((EnumerateInstanceExtensionPropertiesFnPtr)
+                 Resolved(EnumerateInstanceExtensionPropertiesFn, "vkEnumerateInstanceExtensionProperties"))(
+                 pLayerName,
+                 pPropertyCount,
+@@ -143,9 +182,11 @@
+         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+         public static VkResult vkEnumerateInstanceLayerProperties(int* pPropertyCount, VkLayerProperties* pProperties)
+         {
++#if !BRUTAL_MANAGED_FNPTR
+             if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                 return PInvoke.vkEnumerateInstanceLayerProperties(pPropertyCount, pProperties);
+-            return ((delegate* unmanaged[Cdecl]<int*, VkLayerProperties*, VkResult>)
++#endif
++            return ((EnumerateInstanceLayerPropertiesFnPtr)
+                 Resolved(EnumerateInstanceLayerPropertiesFn, "vkEnumerateInstanceLayerProperties"))(
+                 pPropertyCount,
+                 pProperties
+@@ -155,13 +196,15 @@
+         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+         public static VkResult vkEnumerateInstanceVersion(int* pApiVersion)
+         {
++#if !BRUTAL_MANAGED_FNPTR
+             if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                 return PInvoke.vkEnumerateInstanceVersion(pApiVersion);
+-            return ((delegate* unmanaged[Cdecl]<int*, VkResult>)
++#endif
++            return ((EnumerateInstanceVersionFnPtr)
+                 Resolved(EnumerateInstanceVersionFn, "vkEnumerateInstanceVersion"))(pApiVersion);
+         }
+ 
+-        private static delegate* unmanaged[Cdecl]<void> Resolved(PfnVkVoidFunction function, string name)
++        private static VoidFnPtr Resolved(PfnVkVoidFunction function, string name)
+         {
+             if (function.Invoke == null)
+                 throw new EntryPointNotFoundException($"vkGetInstanceProcAddr(NULL, \"{name}\") returned NULL");

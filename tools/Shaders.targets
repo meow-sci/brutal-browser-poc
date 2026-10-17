@@ -1,0 +1,51 @@
+<Project>
+  <!--
+    Shader build step shared by the desktop and browser builds of a game project.
+
+    Usage (in the consuming .csproj, before the Import):
+      <ItemGroup>
+        <ShaderSource Include="../Game/Shaders/*.vert;../Game/Shaders/*.frag;../Game/Shaders/*.comp" />
+      </ItemGroup>
+      <Import Project="$(RepoRoot)tools/Shaders.targets" />
+
+    Outputs:
+      - $(ShaderIntermediateDir)<name>.<ext>.spv, embedded as a resource with LogicalName "Shaders/<name>.<ext>.spv"
+        so that desktop and browser load byte-identical SPIR-V (the browser ICD looks WGSL up by SHA-256 of these bytes).
+      - For browser-wasm builds the web pipeline (tools/build-shaders.mjs) additionally emits WGSL + manifest.json
+        under $(ShaderWebOutputDir), embedded as "Shaders/manifest.json" (see docs/architecture.md § Shader manifest).
+  -->
+  <PropertyGroup>
+    <GlslcPath Condition="'$(GlslcPath)' == ''">glslc</GlslcPath>
+    <ShaderTargetEnv Condition="'$(ShaderTargetEnv)' == ''">vulkan1.1</ShaderTargetEnv>
+    <ShaderOptimize Condition="'$(ShaderOptimize)' == ''">-O</ShaderOptimize>
+    <!-- $(IntermediateOutputPath) is still empty while a project body is evaluated (the SDK defines it later), which put the .spv files into
+         <project>/shaders/. $(BaseIntermediateOutputPath) (obj/) comes from the SDK props and is available here. -->
+    <ShaderIntermediateDir Condition="'$(ShaderIntermediateDir)' == ''">$([MSBuild]::EnsureTrailingSlash($([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(BaseIntermediateOutputPath)', '$(Configuration)', '$(TargetFramework)', 'shaders'))))</ShaderIntermediateDir>
+    <ShaderWebOutputDir Condition="'$(ShaderWebOutputDir)' == ''">$(ShaderIntermediateDir)web/</ShaderWebOutputDir>
+    <ShaderWebPipeline Condition="'$(ShaderWebPipeline)' == '' and '$(RuntimeIdentifier)' == 'browser-wasm'">true</ShaderWebPipeline>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="@(ShaderSource->'$(ShaderIntermediateDir)%(Filename)%(Extension).spv')" LogicalName="Shaders/%(Filename)%(Extension)" Visible="false" />
+  </ItemGroup>
+
+  <!-- A .spv whose ShaderSource was removed or renamed would still be embedded by nothing but translated (and listed in the
+       manifest) by the web pipeline, which reads the whole folder: delete such files, and the manifest so that it is rebuilt. -->
+  <Target Name="RemoveStaleShaders" BeforeTargets="CompileShaders">
+    <ItemGroup>
+      <_ShaderExpectedSpv Include="@(ShaderSource->'$(ShaderIntermediateDir)%(Filename)%(Extension).spv')" />
+      <_ShaderStaleSpv Include="$(ShaderIntermediateDir)*.spv" Exclude="@(_ShaderExpectedSpv)" />
+    </ItemGroup>
+    <Delete Files="@(_ShaderStaleSpv)" />
+    <Delete Files="$(ShaderWebManifest)" Condition="'@(_ShaderStaleSpv)' != '' and '$(ShaderWebManifest)' != ''" />
+  </Target>
+
+  <Target Name="CompileShaders" BeforeTargets="PrepareForBuild"
+          Inputs="@(ShaderSource)" Outputs="@(ShaderSource->'$(ShaderIntermediateDir)%(Filename)%(Extension).spv')">
+    <MakeDir Directories="$(ShaderIntermediateDir)" />
+    <Exec Command="&quot;$(GlslcPath)&quot; --target-env=$(ShaderTargetEnv) $(ShaderOptimize) -I &quot;%(ShaderSource.RootDir)%(ShaderSource.Directory)&quot; -o &quot;$(ShaderIntermediateDir)%(ShaderSource.Filename)%(ShaderSource.Extension).spv&quot; &quot;%(ShaderSource.FullPath)&quot;" />
+  </Target>
+
+  <!-- Web pipeline (WGSL + manifest): tools/Shaders.Web.targets. -->
+  <Import Project="$(MSBuildThisFileDirectory)Shaders.Web.targets" Condition="'$(ShaderWebPipeline)' == 'true'" />
+</Project>

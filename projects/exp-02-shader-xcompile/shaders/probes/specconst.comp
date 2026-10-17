@@ -1,0 +1,6 @@
+#version 450
+layout(local_size_x_id = 0, local_size_y_id = 1) in;
+layout(constant_id = 2) const int N = 4;
+layout(constant_id = 3) const bool FLAG = false;
+layout(std430, binding = 0) buffer Out { float data[]; } o;
+void main() { float acc = 0.0; for (int i = 0; i < N; i++) acc += FLAG ? 1.0 : 2.0; o.data[gl_GlobalInvocationID.x] = acc; }

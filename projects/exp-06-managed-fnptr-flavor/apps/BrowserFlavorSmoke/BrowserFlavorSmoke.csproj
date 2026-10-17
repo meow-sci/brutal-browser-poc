@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!--
+    exp-06 browser-wasm run of the managed function-pointer flavor: source-built Brutal.Vulkan + Brutal.Vulkan.Abstractions
+    (BrutalManagedFnptr=true) driven by shared/ManagedIcd.cs (plain static C# methods, managed delegate*<...>).
+    Based on the .NET 10 `wasmbrowser` template layout. No wasm-tools workload, no native relink, no JS trampolines,
+    no [UnmanagedCallersOnly], no [JSExport]: the prebuilt dotnet.native.wasm is used as is.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+    <BrutalManagedFnptr>true</BrutalManagedFnptr>
+    <DefineConstants>$(DefineConstants);BRUTAL_MANAGED_FNPTR</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <StaticWebAssetFingerprintPattern Include="JS" Pattern="*.js" Expression="#[.{fingerprint}]!" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(Exp06Root)shared/ManagedIcd.cs;$(Exp06Root)shared/FlavorScenario.cs" Link="shared/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Exp06Root)src/Brutal.Vulkan/Brutal.Vulkan.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+    <ProjectReference Include="$(Exp06Root)src/Brutal.Vulkan.Abstractions/Brutal.Vulkan.Abstractions.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,81 @@
+[+   314ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   314ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/WasmSmoke/bin/Release/net10.0/publish/wwwroot
+[+   314ms] [driver] ===== single: http://127.0.0.1:58106/index.html?tests=T13a,T13f,T13b2,T13b3,T13c,T13d,T13d2
+[+   389ms] [server] 404 /favicon.ico
+[+   407ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   412ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   428ms] [console.log] SMOKE START args=[start,tests=T13a,T13f,T13b2,T13b3,T13c,T13d,T13d2]
+[+   436ms] [console.log] BEGIN T13a
+[+   465ms] [console.log] TEST T13a perf-direct-static-call: PASS direct static call: 22.8 ns/call (total 23 ms, acc=500000500000)
+[+   465ms] [console.log] BEGIN T13f
+[+   499ms] [console.log] TEST T13f perf-managed-fnptr (delegate*<int,int,int>): PASS delegate*<int,int,int> (managed calli) -> C# static: 30.6 ns/call (total 31 ms, acc=500000500000)
+[+   499ms] [console.log] BEGIN T13b2
+[+   550ms] [console.log] TEST T13b2 perf-fnptr-to-JS-addFunction: PASS delegate* unmanaged[Cdecl] -> JS addFunction (a+b*100): 45.9 ns/call (total 46 ms, acc=500099500000)
+[+   550ms] [console.log] BEGIN T13b3
+[+   751ms] [console.log] TEST T13b3 perf-fnptr-to-JS-trampoline-to-JSExport: PASS delegate* unmanaged[Cdecl] -> JS trampoline -> [JSExport] C#: 191.3 ns/call (total 191 ms, acc=500000500000)
+[+   751ms] [console.log] BEGIN T13c
+[+   913ms] [console.log] TEST T13c perf-jsimport-int: PASS JSImport int->int: 154.3 ns/call (total 154 ms, acc=499999500000)
+[+   913ms] [console.log] BEGIN T13d
+[+  1127ms] [console.log] TEST T13d perf-jsimport-span64: PASS JSImport Span<byte>[64] as MemoryView (JS reads .byteLength): 205.2 ns/call (total 205 ms, acc=64000000)
+[+  1127ms] [console.log] BEGIN T13d2
+[+  1165ms] [console.log] TEST T13d2 perf-jsimport-span64-copy: PASS JSImport Span<byte>[64] as MemoryView (JS .slice() copy + sum), 100k iters: 279.0 ns/call (total 28 ms, acc=6400000)
+[+  1165ms] [console.log] SMOKE MAIN DONE pass=7 fail=0 (T12 runs from JS rAF after Main returns)
+[+  1166ms] [console.log] HOST runMain resolved: exitCode=0 after 799 ms
+[+  1306ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 135.5 ns/call (total 136 ms, acc=500000500000)
+[+  1451ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=954.3ms last=1104.4ms span=150.1ms (~16.68 ms/frame); runtime alive after Main returned
+[+  1451ms] [console.log] TICKS DONE
+[+  1451ms] [driver] single finished: TICKS DONE
+[+   284ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   284ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/WasmSmoke/bin/Release/net10.0/publish/wwwroot
+[+   284ms] [driver] ===== single: http://127.0.0.1:58132/index.html?tests=T13a,T13f,T13b2,T13b3,T13c,T13d,T13d2
+[+   359ms] [server] 404 /favicon.ico
+[+   379ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   383ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   399ms] [console.log] SMOKE START args=[start,tests=T13a,T13f,T13b2,T13b3,T13c,T13d,T13d2]
+[+   407ms] [console.log] BEGIN T13a
+[+   435ms] [console.log] TEST T13a perf-direct-static-call: PASS direct static call: 22.1 ns/call (total 22 ms, acc=500000500000)
+[+   435ms] [console.log] BEGIN T13f
+[+   468ms] [console.log] TEST T13f perf-managed-fnptr (delegate*<int,int,int>): PASS delegate*<int,int,int> (managed calli) -> C# static: 29.1 ns/call (total 29 ms, acc=500000500000)
+[+   468ms] [console.log] BEGIN T13b2
+[+   517ms] [console.log] TEST T13b2 perf-fnptr-to-JS-addFunction: PASS delegate* unmanaged[Cdecl] -> JS addFunction (a+b*100): 43.7 ns/call (total 44 ms, acc=500099500000)
+[+   517ms] [console.log] BEGIN T13b3
+[+   719ms] [console.log] TEST T13b3 perf-fnptr-to-JS-trampoline-to-JSExport: PASS delegate* unmanaged[Cdecl] -> JS trampoline -> [JSExport] C#: 192.5 ns/call (total 192 ms, acc=500000500000)
+[+   719ms] [console.log] BEGIN T13c
+[+   882ms] [console.log] TEST T13c perf-jsimport-int: PASS JSImport int->int: 155.4 ns/call (total 155 ms, acc=499999500000)
+[+   882ms] [console.log] BEGIN T13d
+[+  1093ms] [console.log] TEST T13d perf-jsimport-span64: PASS JSImport Span<byte>[64] as MemoryView (JS reads .byteLength): 202.3 ns/call (total 202 ms, acc=64000000)
+[+  1093ms] [console.log] BEGIN T13d2
+[+  1131ms] [console.log] TEST T13d2 perf-jsimport-span64-copy: PASS JSImport Span<byte>[64] as MemoryView (JS .slice() copy + sum), 100k iters: 279.0 ns/call (total 28 ms, acc=6400000)
+[+  1131ms] [console.log] SMOKE MAIN DONE pass=7 fail=0 (T12 runs from JS rAF after Main returns)
+[+  1132ms] [console.log] HOST runMain resolved: exitCode=0 after 794 ms
+[+  1275ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 138.5 ns/call (total 139 ms, acc=500000500000)
+[+  1419ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=953.3ms last=1103.6ms span=150.3ms (~16.70 ms/frame); runtime alive after Main returned
+[+  1419ms] [console.log] TICKS DONE
+[+  1419ms] [driver] single finished: TICKS DONE
+[+   278ms] [driver] browser=Chrome/151.0.7922.34 executable=/Users/asherwin/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+[+   278ms] [driver] extraArgs=[] serving /Users/asherwin/repos/meow-sci/brutal-browser/projects/exp-01-dotnet-wasm-smoke/WasmSmoke/bin/Release/net10.0/publish/wwwroot
+[+   278ms] [driver] ===== single: http://127.0.0.1:58147/index.html?tests=T13a,T13f,T13b2,T13b3,T13c,T13d,T13d2
+[+   353ms] [server] 404 /favicon.ico
+[+   372ms] [console.error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[+   376ms] [console.log] HOST runtime created in 43 ms; runtimeBuildInfo={"productVersion":"10.0.1","gitHash":"fad253f51b461736dfd3cd9c15977bb7493becef","buildConfiguration":"Release","wasmEnableThreads":false,"wasmEnableSIMD":true,"wasmEnableExceptionHandling":true}
+[+   391ms] [console.log] SMOKE START args=[start,tests=T13a,T13f,T13b2,T13b3,T13c,T13d,T13d2]
+[+   400ms] [console.log] BEGIN T13a
+[+   428ms] [console.log] TEST T13a perf-direct-static-call: PASS direct static call: 21.8 ns/call (total 22 ms, acc=500000500000)
+[+   428ms] [console.log] BEGIN T13f
+[+   461ms] [console.log] TEST T13f perf-managed-fnptr (delegate*<int,int,int>): PASS delegate*<int,int,int> (managed calli) -> C# static: 30.3 ns/call (total 30 ms, acc=500000500000)
+[+   461ms] [console.log] BEGIN T13b2
+[+   512ms] [console.log] TEST T13b2 perf-fnptr-to-JS-addFunction: PASS delegate* unmanaged[Cdecl] -> JS addFunction (a+b*100): 44.7 ns/call (total 45 ms, acc=500099500000)
+[+   512ms] [console.log] BEGIN T13b3
+[+   717ms] [console.log] TEST T13b3 perf-fnptr-to-JS-trampoline-to-JSExport: PASS delegate* unmanaged[Cdecl] -> JS trampoline -> [JSExport] C#: 195.9 ns/call (total 196 ms, acc=500000500000)
+[+   717ms] [console.log] BEGIN T13c
+[+   879ms] [console.log] TEST T13c perf-jsimport-int: PASS JSImport int->int: 154.0 ns/call (total 154 ms, acc=499999500000)
+[+   879ms] [console.log] BEGIN T13d
+[+  1091ms] [console.log] TEST T13d perf-jsimport-span64: PASS JSImport Span<byte>[64] as MemoryView (JS reads .byteLength): 203.1 ns/call (total 203 ms, acc=64000000)
+[+  1091ms] [console.log] BEGIN T13d2
+[+  1128ms] [console.log] TEST T13d2 perf-jsimport-span64-copy: PASS JSImport Span<byte>[64] as MemoryView (JS .slice() copy + sum), 100k iters: 272.0 ns/call (total 27 ms, acc=6400000)
+[+  1128ms] [console.log] SMOKE MAIN DONE pass=7 fail=0 (T12 runs from JS rAF after Main returns)
+[+  1129ms] [console.log] HOST runMain resolved: exitCode=0 after 797 ms
+[+  1269ms] [console.log] TEST T13e perf-jsexport (JS->C# [JSExport] int->int, 1M): PASS 135.2 ns/call (total 135 ms, acc=500000500000)
+[+  1416ms] [console.log] TEST T12 jsexport-tick: PASS ticks=10 first=956.8ms last=1106.8ms span=150.0ms (~16.67 ms/frame); runtime alive after Main returned
+[+  1416ms] [console.log] TICKS DONE
+[+  1416ms] [driver] single finished: TICKS DONE

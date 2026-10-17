@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Reconstructed project for BRUTAL's Brutal.Vulkan (the public repo ships no .csproj).
+    Sources are compiled in place from $(BrutalSourceRoot)/Brutal.Vulkan (read-only).
+    Patched copies of hand-picked files live under ./Patched and replace the originals.
+
+    Switches:
+      -p:BrutalVulkanPatched=false   build the pristine upstream sources (baseline)
+      -p:BrutalAnalyzers=false       drop the Brutal.Core analyzers (the published package excludes them for consumers)
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Brutal.Vulkan</AssemblyName>
+    <RootNamespace>Brutal.VulkanApi</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings> <!-- required: sources use System/System.Collections.Generic without usings (663 errors with disable) -->
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- Mirror the identity of the published Ahwoo.BRUTAL.Vulkan 2026.10.2 assembly
+         (AssemblyVersion 1.0.0.0, not strong-named) so prebuilt dependents such as
+         Brutal.Vulkan.Abstractions bind to this build unchanged. -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>2026.10.2.0</FileVersion>
+    <InformationalVersion>2026.10.2-exp04-source+BRUTAL.a25cdf8</InformationalVersion>
+    <Company>Ahwoo Limited</Company>
+    <Product>Brutal.Vulkan</Product>
+
+    <BrutalVulkanPatched Condition="'$(BrutalVulkanPatched)' == ''">true</BrutalVulkanPatched>
+    <BrutalAnalyzers Condition="'$(BrutalAnalyzers)' == ''">true</BrutalAnalyzers>
+    <BrutalVulkanSrc>$(BrutalSourceRoot)/Brutal.Vulkan</BrutalVulkanSrc>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BrutalVulkanPatched)' == 'true'">
+    <DefineConstants>$(DefineConstants);BRUTAL_VULKAN_PLUGGABLE_LOADER</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The published assembly carries [assembly: DisableRuntimeMarshalling]; no source file declares it,
+         so the upstream build must add it from the project. -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute" />
+  </ItemGroup>
+
+  <!-- Pristine upstream: everything. -->
+  <ItemGroup Condition="'$(BrutalVulkanPatched)' != 'true'">
+    <Compile Include="$(BrutalVulkanSrc)/**/*.cs" />
+  </ItemGroup>
+
+  <!-- Patched: upstream minus the files we carry patched copies of. -->
+  <ItemGroup Condition="'$(BrutalVulkanPatched)' == 'true'">
+    <Compile Include="$(BrutalVulkanSrc)/**/*.cs"
+             Exclude="$(BrutalVulkanSrc)/ImportResolver.cs;$(BrutalVulkanSrc)/Generated/PInvoke/VulkanApi/VulkanApiEx.gen.cs" />
+    <Compile Include="Patched/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="$(BrutalVersion)" Condition="'$(BrutalAnalyzers)' == 'true'" />
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="$(BrutalVersion)" ExcludeAssets="analyzers" Condition="'$(BrutalAnalyzers)' != 'true'" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" Version="$(BrutalLoggingVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Memory" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" Version="$(BrutalVersion)" />
+    <PackageReference Include="Ahwoo.BRUTAL.Strings" Version="$(BrutalVersion)" />
+  </ItemGroup>
+</Project>

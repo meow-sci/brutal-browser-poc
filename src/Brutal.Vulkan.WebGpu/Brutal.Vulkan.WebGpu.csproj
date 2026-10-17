@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <!--
+    Brutal.Vulkan.WebGpu: the web ICD - the VP_BRUTAL_web_poc_2026 Vulkan subset implemented on the browser's WebGPU,
+    reached by the browser flavor of Brutal.Vulkan through managed function pointers (docs/architecture.md sections 2-6).
+    The Razor SDK is used only for static web assets: wwwroot/webgpu-glue.js is published at the root of the consuming
+    browser app's wwwroot. The assembly is an ordinary class library and also compiles (and is unit-tested) on desktop.
+  -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Vulkan.WebGpu</AssemblyName>
+    <RootNamespace>Brutal.Vulkan.WebGpu</RootNamespace>
+    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- BRUTALCORE0011 (prefer UTF-8 literals): JSON descriptors are built only at object creation, readability wins -->
+    <NoWarn>$(NoWarn);BRUTALCORE0011</NoWarn>
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+    <ProjectReference Include="../Brutal.Vulkan.Abstractions.Browser/Brutal.Vulkan.Abstractions.Browser.csproj" />
+    <ProjectReference Include="../Brutal.Browser/Brutal.Browser.csproj" />
+  </ItemGroup>
+</Project>

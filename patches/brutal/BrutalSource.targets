@@ -1,0 +1,83 @@
+<Project>
+  <!--
+    Compiles a library from the pinned, read-only BRUTAL tree ($(BrutalSourceRoot)$(BrutalLibrary)/**/*.cs) through
+    patches/brutal/transform.py. Imported by src/Brutal.Vulkan.Browser and src/Brutal.Vulkan.Abstractions.Browser,
+    after the project has set BrutalLibrary and before the SDK targets are imported (end of the project body).
+
+    Inputs
+      BrutalLibrary          BRUTAL directory name, e.g. Brutal.Vulkan (required)
+      BrutalSourceRoot       BRUTAL checkout (set by the root Directory.Build.props; -p:BrutalSourceRoot=... or BRUTAL_SRC)
+      BrutalManagedFnptr     true (default): delegate* unmanaged[Cdecl]<...> becomes managed delegate*<...> and
+                             BRUTAL_MANAGED_FNPTR is defined; false: upstream function pointers (desktop/native flavor)
+      BrutalStripUco         true (default): drop [UnmanagedCallersOnly] in the managed flavor (-p:BrutalStripUco=false keeps it)
+      BrutalPython           python interpreter (default python3), run as `python3 -I`
+    Files under <project>/Patched/<relative path> replace BRUTAL's <relative path>; the originals are not copied.
+    The managed flavor keeps the standard obj/bin layout; the unmanaged one builds into obj/unmanaged and bin/unmanaged so
+    both can exist side by side (it is the verification flavor; every consumer in this repo uses the managed one).
+  -->
+  <PropertyGroup>
+    <BrutalManagedFnptr Condition="'$(BrutalManagedFnptr)' == ''">true</BrutalManagedFnptr>
+    <BrutalStripUco Condition="'$(BrutalStripUco)' == ''">true</BrutalStripUco>
+    <BrutalPython Condition="'$(BrutalPython)' == ''">python3</BrutalPython>
+    <BrutalFlavor Condition="'$(BrutalManagedFnptr)' == 'true'">managed</BrutalFlavor>
+    <BrutalFlavor Condition="'$(BrutalManagedFnptr)' != 'true'">unmanaged</BrutalFlavor>
+    <BrutalSourceRoot Condition="'$(BrutalSourceRoot)' == ''">$([MSBuild]::NormalizeDirectory('$(RepoRoot)', '..', 'BRUTAL'))</BrutalSourceRoot>
+    <BrutalTransformScript>$(MSBuildThisFileDirectory)transform.py</BrutalTransformScript>
+    <InformationalVersion Condition="'$(InformationalVersion)' != ''">$(InformationalVersion).$(BrutalFlavor)-fnptr</InformationalVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BrutalManagedFnptr)' == 'true'">
+    <DefineConstants>$(DefineConstants);BRUTAL_MANAGED_FNPTR</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BrutalManagedFnptr)' != 'true'">
+    <BaseOutputPath>bin/unmanaged/</BaseOutputPath>
+    <IntermediateOutputPath>obj/unmanaged/$(Configuration)/</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The published BRUTAL assemblies carry [assembly: DisableRuntimeMarshalling]; no source file declares it. -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute" />
+  </ItemGroup>
+
+  <!-- Resolve paths, collect inputs and record the options (rewritten only when they change, so a changed option reruns the transform). -->
+  <Target Name="_BrutalPrepareTransform">
+    <PropertyGroup>
+      <_BrutalSrcDir>$([MSBuild]::NormalizePath('$(BrutalSourceRoot)', '$(BrutalLibrary)'))</_BrutalSrcDir>
+      <_BrutalOutDir>$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', 'brutal-src'))</_BrutalOutDir>
+      <_BrutalStamp>$(_BrutalOutDir).stamp</_BrutalStamp>
+      <_BrutalOptionsFile>$(_BrutalOutDir).options</_BrutalOptionsFile>
+    </PropertyGroup>
+    <Error Condition="'$(BrutalLibrary)' == ''" Text="BrutalLibrary must be set before importing BrutalSource.targets." />
+    <Error Condition="!Exists('$(_BrutalSrcDir)')"
+           Text="BRUTAL source not found: $(_BrutalSrcDir). Set -p:BrutalSourceRoot=... or the BRUTAL_SRC environment variable to the pinned BRUTAL checkout." />
+    <ItemGroup>
+      <!-- the same files transform.py reads: bin/ and obj/ of a build inside the BRUTAL checkout are not inputs -->
+      <_BrutalSourceFile Include="$(_BrutalSrcDir)/**/*.cs" Exclude="$(_BrutalSrcDir)/**/bin/**;$(_BrutalSrcDir)/**/obj/**" />
+      <_BrutalPatchedFile Include="$(MSBuildProjectDirectory)/Patched/**/*.cs" />
+      <_BrutalExclude Include="@(_BrutalPatchedFile->'%(RecursiveDir)%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <PropertyGroup>
+      <_BrutalFlavorArgs Condition="'$(BrutalManagedFnptr)' == 'true'">--managed-fnptr</_BrutalFlavorArgs>
+      <_BrutalFlavorArgs Condition="'$(BrutalManagedFnptr)' == 'true' and '$(BrutalStripUco)' == 'false'">$(_BrutalFlavorArgs) --no-strip-uco</_BrutalFlavorArgs>
+      <_BrutalExcludeArgs>@(_BrutalExclude->'--exclude &quot;%(Identity)&quot;', ' ')</_BrutalExcludeArgs>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(_BrutalOptionsFile)" Overwrite="true" WriteOnlyWhenDifferent="true"
+                      Lines="src=$(_BrutalSrcDir);flavor=$(_BrutalFlavorArgs);excludes=$(_BrutalExcludeArgs)" />
+  </Target>
+
+  <Target Name="TransformBrutalSources" DependsOnTargets="_BrutalPrepareTransform"
+          Inputs="@(_BrutalSourceFile);@(_BrutalPatchedFile);$(BrutalTransformScript);$(MSBuildThisFileFullPath);$(_BrutalOptionsFile)"
+          Outputs="$(_BrutalStamp)">
+    <Exec Command="&quot;$(BrutalPython)&quot; -I &quot;$(BrutalTransformScript)&quot; --src &quot;$(_BrutalSrcDir)&quot; --out &quot;$(_BrutalOutDir)&quot; $(_BrutalFlavorArgs) $(_BrutalExcludeArgs)"
+          StandardOutputImportance="high" />
+    <Touch Files="$(_BrutalStamp)" AlwaysCreate="true" />
+  </Target>
+
+  <!-- Runs on every build (also when the transform was up to date): compile the generated copies, keep them out of IncrementalClean. -->
+  <Target Name="_BrutalIncludeGeneratedSources" BeforeTargets="BeforeCompile" DependsOnTargets="TransformBrutalSources">
+    <ItemGroup>
+      <Compile Include="$(_BrutalOutDir)/**/*.cs" />
+      <FileWrites Include="$(_BrutalOutDir)/**/*;$(_BrutalStamp);$(_BrutalOptionsFile)" />
+    </ItemGroup>
+  </Target>
+</Project>

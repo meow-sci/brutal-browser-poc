@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!-- Smoke app for Brutal.Browser + Brutal.Glfw.Browser: input events, Web Audio and the frame loop (no WebGPU). -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Browser.Smoke</AssemblyName>
+    <RootNamespace>Brutal.Browser.Smoke</RootNamespace>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <WasmEnableHotReload>false</WasmEnableHotReload>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <StaticWebAssetFingerprintPattern Include="JS" Pattern="*.js" Expression="#[.{fingerprint}]!" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Brutal.Browser/Brutal.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Glfw.Browser/Brutal.Glfw.Browser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets/874222__samrad20__generic-explosion.ogg" LogicalName="Assets/874222__samrad20__generic-explosion.ogg" />
+  </ItemGroup>
+</Project>

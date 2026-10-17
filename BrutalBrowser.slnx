@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/samples/" />
+  <Folder Name="/samples/HelloMesh/">
+    <Project Path="samples/HelloMesh/HelloMesh.Browser/HelloMesh.Browser.csproj" />
+    <Project Path="samples/HelloMesh/HelloMesh.Desktop/HelloMesh.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Brutal.Browser/Brutal.Browser.csproj" />
+    <Project Path="src/Brutal.Glfw.Browser/Brutal.Glfw.Browser.csproj" />
+    <Project Path="src/Brutal.Vulkan.Abstractions.Browser/Brutal.Vulkan.Abstractions.Browser.csproj" />
+    <Project Path="src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+    <Project Path="src/Brutal.Vulkan.WebGpu/Brutal.Vulkan.WebGpu.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Brutal.Browser.Smoke/Brutal.Browser.Smoke.csproj" />
+    <Project Path="tests/Brutal.Browser.Tests/Brutal.Browser.Tests.csproj" />
+    <Project Path="tests/Brutal.Vulkan.Browser.Tests/Brutal.Vulkan.Browser.Tests.csproj" />
+    <Project Path="tests/Brutal.Vulkan.WebGpu.Smoke/Brutal.Vulkan.WebGpu.Smoke.csproj" />
+    <Project Path="tests/Brutal.Vulkan.WebGpu.Tests/Brutal.Vulkan.WebGpu.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Desktop-runnable tests for the pure-managed parts of Brutal.Browser / Brutal.Glfw.Browser: the JS key table against
+    GlfwKey, the NVorbis decode path, the input state machine and the GlfwWindow event mapping (records are injected through
+    BrowserInput.DispatchForTest, no browser involved). The end-to-end browser test is tests/Brutal.Browser.Smoke/test/run.mjs.
+  -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Brutal.Browser/Brutal.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Glfw.Browser/Brutal.Glfw.Browser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <None Include="../Brutal.Browser.Smoke/Assets/874222__samrad20__generic-explosion.ogg" Link="Assets/874222__samrad20__generic-explosion.ogg" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../src/Brutal.Browser/wwwroot/brutal-browser.js" Link="wwwroot/brutal-browser.js" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

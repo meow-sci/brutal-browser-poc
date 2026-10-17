@@ -1,0 +1,22 @@
+<Project>
+  <!-- Central package versions (projects omit Version on PackageReference). Experiments under projects/ are unaffected. -->
+  <ItemGroup Condition="!$(MSBuildProjectDirectory.Contains('/projects/'))">
+    <PackageVersion Include="Ahwoo.BRUTAL.Core" Version="2026.10.1" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Memory" Version="2026.10.1" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Collections" Version="2026.10.1" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Strings" Version="2026.10.1" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Numerics" Version="2026.10.1" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Logging" Version="2026.10.2" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Vulkan" Version="2026.10.2" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Vulkan.Abstractions" Version="2026.10.2" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Glfw" Version="2026.10.4" />
+    <PackageVersion Include="Ahwoo.BRUTAL.OpenAl" Version="2026.10.2" />
+    <PackageVersion Include="Ahwoo.BRUTAL.Gltf" Version="2026.10.2" />
+    <PackageVersion Include="CommunityToolkit.HighPerformance" Version="8.4.2" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.0" />
+    <PackageVersion Include="NVorbis" Version="0.10.5" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+  </ItemGroup>
+</Project>

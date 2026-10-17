@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>HelloMesh.Desktop</AssemblyName>
+    <RootNamespace>HelloMesh</RootNamespace>
+    <!-- Package natives (libglfw, libVulkanEx, OpenAL) are only copied next to the assemblies for a concrete RID. -->
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../Game/**/*.cs" Link="Game/%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../Assets/SunglassesKhronos.glb" LogicalName="Assets/SunglassesKhronos.glb" />
+    <EmbeddedResource Include="../Assets/874222__samrad20__generic-explosion.ogg" LogicalName="Assets/874222__samrad20__generic-explosion.ogg" />
+    <ShaderSource Include="../Game/Shaders/*.vert;../Game/Shaders/*.frag" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan" />
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan.Abstractions" />
+    <PackageReference Include="Ahwoo.BRUTAL.Glfw" />
+    <PackageReference Include="Ahwoo.BRUTAL.OpenAl" />
+    <PackageReference Include="Ahwoo.BRUTAL.Gltf" />
+    <PackageReference Include="NVorbis" />
+  </ItemGroup>
+
+  <Import Project="$(RepoRoot)tools/Shaders.targets" />
+
+</Project>

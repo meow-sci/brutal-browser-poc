@@ -1,0 +1,12 @@
+{
+  "name": "exp-01-dotnet-wasm-smoke-test",
+  "private": true,
+  "type": "module",
+  "description": "Headless-Chromium driver for the exp-01 .NET browser-wasm smoke test",
+  "scripts": {
+    "test": "node run-smoke.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "25.12.0"
+  }
+}

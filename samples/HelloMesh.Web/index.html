@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>HelloMesh</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #14161c; color: #d8dce6; font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace; }
+      /* Sizing in device pixels (DPR aware) is done by brutal-browser.js; CSS only makes the canvas fill the window. */
+      #canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; outline: none; touch-action: none; }
+      #overlay { position: fixed; inset: 0; display: grid; place-items: center; background: rgb(20 22 28 / 0.55); }
+      #overlay[hidden], #error[hidden] { display: none; }
+      #start { font: 600 20px/1 system-ui, sans-serif; padding: 16px 32px; color: #14161c; background: #7fd1ff; border: 0; border-radius: 8px; cursor: pointer; }
+      #start:disabled { background: #50627a; color: #aab4c4; cursor: progress; }
+      /* Page-to-game commands (BrowserHost.Dispatch). Below the start overlay, above the canvas. */
+      #bar { position: fixed; right: 8px; bottom: 6px; display: flex; gap: 8px; }
+      #bar button { font: 600 12px/1 system-ui, sans-serif; padding: 7px 12px; color: #d8dce6; background: rgb(20 22 28 / 0.75); border: 1px solid #50627a; border-radius: 6px; cursor: pointer; }
+      #bar button:hover:not(:disabled) { background: #2c3a4e; }
+      #bar button:disabled { opacity: 0.5; cursor: progress; }
+      #status { position: fixed; left: 8px; bottom: 6px; margin: 0; opacity: 0.7; pointer-events: none; text-shadow: 0 0 3px #000; }
+      #error { position: fixed; left: 0; right: 0; top: 0; max-height: 50%; overflow: auto; margin: 0; padding: 10px 14px; box-sizing: border-box;
+               white-space: pre-wrap; color: #fff; background: rgb(150 20 30 / 0.92); pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" tabindex="0"></canvas>
+    <div id="bar"><button id="play-sound" type="button" disabled>Play sound</button></div>
+    <div id="overlay"><button id="start" type="button" disabled>Loading...</button></div>
+    <pre id="status">starting</pre>
+    <pre id="error" hidden></pre>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

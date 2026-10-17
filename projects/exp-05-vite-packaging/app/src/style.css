@@ -1,0 +1,4 @@
+:root { color-scheme: light dark; }
+body { margin: 0; padding: 16px; font: 14px/1.4 system-ui, sans-serif; }
+canvas { display: block; width: 256px; height: 256px; border: 1px solid #888; }
+pre { white-space: pre-wrap; }

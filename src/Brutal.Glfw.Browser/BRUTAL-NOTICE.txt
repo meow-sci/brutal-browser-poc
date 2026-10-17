@@ -1,0 +1,8 @@
+Parts of this project (Generated/**, Glfw.cs, Callbacks.cs) are copied verbatim from BRUTAL's Brutal.Glfw
+(pinned commit a25cdf8): enums, constants, plain structs, managed callback delegate types and
+the exception aggregator.
+
+BRUTAL game development framework is Copyright (c) 2024 Ahwoo Limited.
+Licensed under the BRUTAL License v1.0. The above copyright notice and the licence text shall be included in all copies or
+substantial portions of the Software; any Product built using it must follow the licence's credits-screen, logo and
+NOTICE.txt conditions. See LICENSE.txt in the BRUTAL repository.

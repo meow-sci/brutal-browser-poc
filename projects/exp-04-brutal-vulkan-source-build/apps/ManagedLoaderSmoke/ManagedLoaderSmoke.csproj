@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Desktop console app: source-built (patched) Brutal.Vulkan driven by a C# vkGetInstanceProcAddr (shared/FakeIcd.cs). No GPU / Vulkan SDK needed. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(Exp04Root)shared/*.cs" Link="shared/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Exp04Root)src/Brutal.Vulkan/Brutal.Vulkan.csproj" />
+    <!-- NuGet Abstractions, compiled against the NuGet Brutal.Vulkan, must bind to the source-built one. -->
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan.Abstractions" Version="$(BrutalVulkanVersion)" />
+    <!-- Keep only the native asset (libVulkanEx) of the transitive Ahwoo.BRUTAL.Vulkan package; drop its managed dll. -->
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan" Version="$(BrutalVulkanVersion)" ExcludeAssets="compile;runtime" />
+  </ItemGroup>
+</Project>

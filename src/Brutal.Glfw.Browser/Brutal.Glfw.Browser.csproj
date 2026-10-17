@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Source-compatible subset of BRUTAL's Brutal.GlfwApi (namespace Brutal.GlfwApi, assembly Brutal.Glfw) implemented over
+    Brutal.Browser. Enums, constants and plain structs are copied verbatim from the pinned BRUTAL tree (see README).
+  -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Glfw</AssemblyName>
+    <RootNamespace>Brutal.GlfwApi</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- verbatim BRUTAL sources carry their own doc style (CS1591 is off only for Generated/, see Generated/.editorconfig);
+         CS0067: the events the browser never raises are declared for source compatibility -->
+    <NoWarn>$(NoWarn);CS1573;CS1587;CS1570;CS1574;CS0067</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" />
+    <ProjectReference Include="../Brutal.Browser/Brutal.Browser.csproj" />
+  </ItemGroup>
+</Project>

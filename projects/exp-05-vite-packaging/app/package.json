@@ -1,0 +1,28 @@
+{
+  "name": "exp-05-vite-packaging",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dotnet:build": "dotnet build ../dotnet-fixture -c Debug",
+    "dotnet:publish": "dotnet publish ../dotnet-fixture -c Release -o ../out/publish-plain",
+    "dotnet:publish:bundler": "dotnet publish ../dotnet-fixture -c Release -p:BundlerFriendly=true -o ../out/publish-bundler",
+    "dev": "DOTNET_FRAMEWORK_DIR=../dotnet-fixture/bin/Debug/net10.0/wwwroot/_framework vite",
+    "dev:manifest": "DOTNET_MANIFEST=../dotnet-fixture/bin/Debug/net10.0/Fixture.staticwebassets.runtime.json vite",
+    "build": "tsc && DOTNET_FRAMEWORK_DIR=../out/publish-plain/wwwroot/_framework vite build",
+    "preview": "DOTNET_FRAMEWORK_DIR=../out/publish-plain/wwwroot/_framework vite preview",
+    "dev:bundled": "vite --config vite.bundled.config.ts",
+    "build:bundled": "DOTNET_OUTPUT_DIR=../out/publish-bundler vite build --config vite.bundled.config.ts",
+    "test:headless": "DOTNET_FRAMEWORK_DIR=../dotnet-fixture/bin/Debug/net10.0/wwwroot/_framework node test/headless.mjs --serve --expect-dotnet",
+    "typecheck": "tsc --noEmit",
+    "test:matrix": "DOTNET_FRAMEWORK_DIR=../dotnet-fixture/bin/Debug/net10.0/wwwroot/_framework node test/matrix.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@webgpu/types": "^0.1.74",
+    "puppeteer-core": "^25.14.0",
+    "typescript": "~6.0.2",
+    "unplugin-dotnet-wasm": "^1.5.2",
+    "vite": "^8.3.0"
+  }
+}

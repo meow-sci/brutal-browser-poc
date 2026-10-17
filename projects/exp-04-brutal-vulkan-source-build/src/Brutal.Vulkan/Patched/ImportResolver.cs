@@ -1,0 +1,171 @@
+namespace Brutal.VulkanApi;
+
+public partial class Vulkan
+{
+    // The dll name we expect LibraryImport functions calling Vulkan to use
+    private const string PInvokeDllName = "vulkan";
+
+    // AppContext key that lets the application supply vkGetInstanceProcAddr itself instead of having a native
+    // Vulkan library loaded. Set it with AppContext.SetData before the first use of Vulkan; the value is a boxed
+    // nint (or long/ulong) holding a delegate* unmanaged[Cdecl]<VkInstance, byte*, PfnVkVoidFunction>.
+    // Required on browser-wasm, where there is no native loader; honoured on every platform (software ICDs,
+    // layering, tests). When it is absent the native loading below is unchanged.
+    private const string GetInstanceProcAddrKey = "BRUTAL_VULKAN_GET_INSTANCE_PROC_ADDR";
+
+    // Cached reference to the loaded Vulkan dll
+    private static readonly nint Dll;
+
+    /// <summary>
+    /// The function pointer to vkGetInstanceProcAddr, loaded from the Vulkan library.
+    /// </summary>
+    public static VkGetInstanceProcAddr GetInstanceProcAddr { get; }
+
+    // Global commands resolved through vkGetInstanceProcAddr(NULL, ...) when the loader was supplied through
+    // AppContext; unused (null) when the native library and its LibraryImport exports are used.
+    private static readonly bool UseProcAddrForGlobalCommands;
+    private static readonly PfnVkVoidFunction CreateInstanceFn;
+    private static readonly PfnVkVoidFunction EnumerateInstanceExtensionPropertiesFn;
+    private static readonly PfnVkVoidFunction EnumerateInstanceLayerPropertiesFn;
+    private static readonly PfnVkVoidFunction EnumerateInstanceVersionFn;
+
+    static Vulkan()
+    {
+        // Use an application supplied vkGetInstanceProcAddr when one is configured
+        var suppliedGetInstanceProcAddr = AppContext.GetData(GetInstanceProcAddrKey) switch
+        {
+            nint value => value,
+            long value => (nint)value,
+            ulong value => (nint)value,
+            _ => nint.Zero,
+        };
+
+        if (suppliedGetInstanceProcAddr != nint.Zero)
+        {
+            unsafe
+            {
+                GetInstanceProcAddr = new VkGetInstanceProcAddr(
+                    (delegate* unmanaged[Cdecl]<VkInstance, byte*, PfnVkVoidFunction>)suppliedGetInstanceProcAddr
+                );
+                CreateInstanceFn = GetInstanceProcAddr.Invoke(default, "vkCreateInstance"u8.AsPointer());
+                EnumerateInstanceExtensionPropertiesFn = GetInstanceProcAddr.Invoke(
+                    default,
+                    "vkEnumerateInstanceExtensionProperties"u8.AsPointer()
+                );
+                EnumerateInstanceLayerPropertiesFn = GetInstanceProcAddr.Invoke(
+                    default,
+                    "vkEnumerateInstanceLayerProperties"u8.AsPointer()
+                );
+                EnumerateInstanceVersionFn = GetInstanceProcAddr.Invoke(
+                    default,
+                    "vkEnumerateInstanceVersion"u8.AsPointer()
+                );
+            }
+            UseProcAddrForGlobalCommands = true;
+            return;
+        }
+
+        if (OperatingSystem.IsBrowser())
+            throw new PlatformNotSupportedException(
+                $"There is no native Vulkan library on this platform. Set AppContext data '{GetInstanceProcAddrKey}' "
+                    + "to a vkGetInstanceProcAddr function pointer before first using Vulkan."
+            );
+
+        // Load the correct Vulkan library for the platform
+
+        if (OperatingSystem.IsWindows())
+            Dll = NativeLibrary.Load("vulkan-1", typeof(Vulkan).Assembly, DllImportSearchPath.System32);
+
+        // TODO: This is a hack which only works if SDK is installed, we need to package the Vulkan binary on macOS
+        if (OperatingSystem.IsMacOS())
+            Dll = NativeLibrary.Load("VulkanEx", typeof(Vulkan).Assembly, DllImportSearchPath.LegacyBehavior);
+
+        if (OperatingSystem.IsLinux())
+            Dll = NativeLibrary.Load("vulkan", typeof(Vulkan).Assembly, DllImportSearchPath.LegacyBehavior);
+
+        if (Dll == nint.Zero)
+            throw new NullReferenceException("Failed to load Vulkan library");
+
+        // Assign the native library to the assembly resolver
+        NativeLibrary.SetDllImportResolver(
+            typeof(Vulkan).Assembly,
+            (libraryName, _, _) => libraryName == PInvokeDllName ? Dll : nint.Zero
+        );
+
+        // Load the vkGetInstanceProcAddr function
+        unsafe
+        {
+            GetInstanceProcAddr = new VkGetInstanceProcAddr(
+                (delegate* unmanaged[Cdecl]<VkInstance, byte*, PfnVkVoidFunction>)
+                    NativeLibrary.GetExport(Dll, "vkGetInstanceProcAddr")
+            );
+            if (GetInstanceProcAddr.Invoke == null)
+                throw new NullReferenceException("Failed to load vkGetInstanceProcAddr from Vulkan library");
+        }
+    }
+
+    /// <summary>
+    /// The four global (instance-less) commands. They go to the LibraryImport exports of the native library, or
+    /// through vkGetInstanceProcAddr(NULL, name) when the application supplied vkGetInstanceProcAddr.
+    /// The OperatingSystem.IsBrowser() test is constant-folded by the trimmer, so browser builds drop the P/Invokes.
+    /// </summary>
+    internal static unsafe class GlobalCommands
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VkResult vkCreateInstance(
+            VkInstanceCreateInfo* pCreateInfo,
+            VkAllocationCallbacks* pAllocator,
+            VkInstance* pInstance
+        )
+        {
+            if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                return PInvoke.vkCreateInstance(pCreateInfo, pAllocator, pInstance);
+            return ((delegate* unmanaged[Cdecl]<VkInstanceCreateInfo*, VkAllocationCallbacks*, VkInstance*, VkResult>)
+                Resolved(CreateInstanceFn, "vkCreateInstance"))(pCreateInfo, pAllocator, pInstance);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VkResult vkEnumerateInstanceExtensionProperties(
+            byte* pLayerName,
+            int* pPropertyCount,
+            VkExtensionProperties* pProperties
+        )
+        {
+            if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                return PInvoke.vkEnumerateInstanceExtensionProperties(pLayerName, pPropertyCount, pProperties);
+            return ((delegate* unmanaged[Cdecl]<byte*, int*, VkExtensionProperties*, VkResult>)
+                Resolved(EnumerateInstanceExtensionPropertiesFn, "vkEnumerateInstanceExtensionProperties"))(
+                pLayerName,
+                pPropertyCount,
+                pProperties
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VkResult vkEnumerateInstanceLayerProperties(int* pPropertyCount, VkLayerProperties* pProperties)
+        {
+            if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                return PInvoke.vkEnumerateInstanceLayerProperties(pPropertyCount, pProperties);
+            return ((delegate* unmanaged[Cdecl]<int*, VkLayerProperties*, VkResult>)
+                Resolved(EnumerateInstanceLayerPropertiesFn, "vkEnumerateInstanceLayerProperties"))(
+                pPropertyCount,
+                pProperties
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VkResult vkEnumerateInstanceVersion(int* pApiVersion)
+        {
+            if (!OperatingSystem.IsBrowser() && !UseProcAddrForGlobalCommands)
+                return PInvoke.vkEnumerateInstanceVersion(pApiVersion);
+            return ((delegate* unmanaged[Cdecl]<int*, VkResult>)
+                Resolved(EnumerateInstanceVersionFn, "vkEnumerateInstanceVersion"))(pApiVersion);
+        }
+
+        private static delegate* unmanaged[Cdecl]<void> Resolved(PfnVkVoidFunction function, string name)
+        {
+            if (function.Invoke == null)
+                throw new EntryPointNotFoundException($"vkGetInstanceProcAddr(NULL, \"{name}\") returned NULL");
+            return function.Invoke;
+        }
+    }
+}

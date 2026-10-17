@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- exp-06 desktop (CoreCLR JIT) run of the managed function-pointer flavor: source-built Brutal.Vulkan +
+       Brutal.Vulkan.Abstractions (BrutalManagedFnptr=true) driven by shared/ManagedIcd.cs. No Vulkan SDK / GPU needed. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BrutalManagedFnptr>true</BrutalManagedFnptr>
+    <DefineConstants>$(DefineConstants);BRUTAL_MANAGED_FNPTR</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(Exp06Root)shared/ManagedIcd.cs;$(Exp06Root)shared/FlavorScenario.cs" Link="shared/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Exp06Root)src/Brutal.Vulkan/Brutal.Vulkan.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+    <ProjectReference Include="$(Exp06Root)src/Brutal.Vulkan.Abstractions/Brutal.Vulkan.Abstractions.csproj" AdditionalProperties="BrutalManagedFnptr=$(BrutalManagedFnptr)" />
+  </ItemGroup>
+</Project>

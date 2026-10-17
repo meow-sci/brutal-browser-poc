@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!--
+    Browser host of the HelloMesh sample (docs/architecture.md sections 1-5): the shared game code in ../Game compiled against the
+    browser flavor of the BRUTAL bindings, running on the web ICD (Vulkan on WebGPU). samples/HelloMesh.Web (Vite) owns the page:
+    it serves the published wwwroot, boots the runtime and calls BrowserHost.Tick, so this project has no wwwroot of its own.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>HelloMesh.Browser</AssemblyName>
+    <RootNamespace>HelloMesh</RootNamespace>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <WasmEnableHotReload>false</WasmEnableHotReload>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- Brutal.Gltf deserialises the glTF JSON with reflection-based System.Text.Json (no source-generated context), which
+         trimmed apps disable by default; Brutal.Gltf is rooted below so the trimmer keeps its schema types. -->
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../Game/**/*.cs" Link="Game/%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../Assets/SunglassesKhronos.glb" LogicalName="Assets/SunglassesKhronos.glb" />
+    <EmbeddedResource Include="../Assets/874222__samrad20__generic-explosion.ogg" LogicalName="Assets/874222__samrad20__generic-explosion.ogg" />
+    <ShaderSource Include="../Game/Shaders/*.vert;../Game/Shaders/*.frag" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+    <ProjectReference Include="../../../src/Brutal.Vulkan.Abstractions.Browser/Brutal.Vulkan.Abstractions.Browser.csproj" />
+    <ProjectReference Include="../../../src/Brutal.Vulkan.WebGpu/Brutal.Vulkan.WebGpu.csproj" />
+    <ProjectReference Include="../../../src/Brutal.Browser/Brutal.Browser.csproj" />
+    <ProjectReference Include="../../../src/Brutal.Glfw.Browser/Brutal.Glfw.Browser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" />
+    <PackageReference Include="Ahwoo.BRUTAL.Gltf" />
+    <!-- Never mix the NuGet-built Vulkan/GLFW assemblies with the managed-pointer flavor projects above (architecture.md section 1). -->
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan" ExcludeAssets="all" />
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan.Abstractions" ExcludeAssets="all" />
+    <PackageReference Include="Ahwoo.BRUTAL.Glfw" ExcludeAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Brutal.Gltf" />
+  </ItemGroup>
+
+  <Import Project="$(RepoRoot)tools/Shaders.targets" />
+
+</Project>

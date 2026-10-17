@@ -1,0 +1,10 @@
+<Project>
+  <!-- exp-04 shared settings. BRUTAL source checkout is READ-ONLY and consumed in place. -->
+  <PropertyGroup>
+    <BrutalSourceRoot Condition="'$(BrutalSourceRoot)' == ''">/Users/asherwin/repos/meow-sci/BRUTAL</BrutalSourceRoot>
+    <BrutalVersion>2026.10.1</BrutalVersion>
+    <BrutalLoggingVersion>2026.10.2</BrutalLoggingVersion>
+    <BrutalVulkanVersion>2026.10.2</BrutalVulkanVersion>
+    <Exp04Root>$(MSBuildThisFileDirectory)</Exp04Root>
+  </PropertyGroup>
+</Project>

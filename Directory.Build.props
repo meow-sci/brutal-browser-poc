@@ -1,0 +1,19 @@
+<Project>
+  <!-- Repository-wide defaults. The experiments under projects/ keep their own settings. -->
+  <PropertyGroup Condition="!$(MSBuildProjectDirectory.Contains('/projects/'))">
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <!-- Pinned open-source BRUTAL tree (commit a25cdf8). Override with -p:BrutalSourceRoot=... or the BRUTAL_SRC env var. -->
+    <BrutalSourceRoot Condition="'$(BrutalSourceRoot)' == '' and '$(BRUTAL_SRC)' != ''">$(BRUTAL_SRC)</BrutalSourceRoot>
+    <BrutalSourceRoot Condition="'$(BrutalSourceRoot)' == ''">$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', 'BRUTAL'))</BrutalSourceRoot>
+    <BrutalSourceRoot>$([MSBuild]::EnsureTrailingSlash('$(BrutalSourceRoot)'))</BrutalSourceRoot>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+</Project>

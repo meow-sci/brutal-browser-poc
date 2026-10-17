@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Tests for the browser flavor of the BRUTAL Vulkan bindings (managed function pointers + pluggable loader).
+    This assembly is compiled in the managed flavor (BRUTAL_MANAGED_FNPTR): the fake ICD takes `&Method` as delegate*<...>.
+    LoaderTests also need the *unmanaged* flavor of Brutal.Vulkan; it is built from the same project with
+    BrutalManagedFnptr=false and copied to $(OutDir)unmanaged-flavor/ (loaded into an isolated AssemblyLoadContext).
+  -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <DefineConstants>$(DefineConstants);BRUTAL_MANAGED_FNPTR</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj" />
+    <ProjectReference Include="../../src/Brutal.Vulkan.Abstractions.Browser/Brutal.Vulkan.Abstractions.Browser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <!-- Where the tests find the patches, the patched sources and the pinned BRUTAL tree. -->
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>RepoRoot</_Parameter1>
+      <_Parameter2>$(RepoRoot)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>BrutalSourceRoot</_Parameter1>
+      <_Parameter2>$(BrutalSourceRoot)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <Target Name="BuildUnmanagedVulkanFlavor" AfterTargets="CopyFilesToOutputDirectory">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)../../src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj"
+             Targets="Build" Properties="BrutalManagedFnptr=false;Configuration=$(Configuration)" />
+    <MSBuild Projects="$(MSBuildThisFileDirectory)../../src/Brutal.Vulkan.Browser/Brutal.Vulkan.Browser.csproj"
+             Targets="GetTargetPath" Properties="BrutalManagedFnptr=false;Configuration=$(Configuration)">
+      <Output TaskParameter="TargetOutputs" ItemName="_UnmanagedVulkanDll" />
+    </MSBuild>
+    <Copy SourceFiles="@(_UnmanagedVulkanDll)" DestinationFolder="$(OutDir)unmanaged-flavor" />
+  </Target>
+</Project>

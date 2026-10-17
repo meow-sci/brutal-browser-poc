@@ -1,0 +1,6 @@
+# Keep byte-exact line endings for upstream-derived files (the loader patches must apply to BRUTAL's CRLF files)
+patches/brutal/*.patch -text
+src/Brutal.Vulkan.Browser/Patched/**/*.cs -text
+*.glb binary
+*.ogg binary
+*.png binary

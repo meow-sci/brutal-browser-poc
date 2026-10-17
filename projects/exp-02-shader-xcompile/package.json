@@ -1,0 +1,12 @@
+{
+  "name": "exp-02-shader-xcompile",
+  "version": "0.0.0",
+  "description": "SPIR-V to WGSL cross-compilation experiments for the BRUTAL-in-the-browser PoC",
+  "scripts": {
+    "test": "./run.sh"
+  },
+  "dependencies": {
+    "naga-wasm": "^30.2.0"
+  },
+  "private": true
+}

@@ -1,0 +1,12 @@
+{
+  "name": "brutal-browser-smoke-test",
+  "private": true,
+  "type": "module",
+  "description": "Playwright driver for the Brutal.Browser smoke app (input events, Web Audio, frame loop)",
+  "scripts": {
+    "test": "node run.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  }
+}

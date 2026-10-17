@@ -1,0 +1,20 @@
+<Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <!--
+    Flavor switch for the source-built BRUTAL libraries:
+      BrutalManagedFnptr=false (default)  upstream delegate* unmanaged[Cdecl]<...> function pointers (exp-04 equivalent)
+      BrutalManagedFnptr=true             managed delegate*<...> (transformed copies + BRUTAL_MANAGED_FNPTR define)
+    Apps choose a flavor with  <ProjectReference ... AdditionalProperties="BrutalManagedFnptr=true" />  or  -p:BrutalManagedFnptr=true.
+    Both flavors build from the same projects side by side: obj/ and bin/ are split per flavor; NuGet restore output
+    (identical for both flavors) stays in obj/.
+  -->
+  <PropertyGroup>
+    <BrutalManagedFnptr Condition="'$(BrutalManagedFnptr)' == ''">false</BrutalManagedFnptr>
+    <BrutalFlavor Condition="'$(BrutalManagedFnptr)' == 'true'">managed</BrutalFlavor>
+    <BrutalFlavor Condition="'$(BrutalManagedFnptr)' != 'true'">unmanaged</BrutalFlavor>
+    <MSBuildProjectExtensionsPath>$(MSBuildProjectDirectory)/obj/</MSBuildProjectExtensionsPath>
+    <BaseIntermediateOutputPath>$(MSBuildProjectDirectory)/obj/$(BrutalFlavor)/</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildProjectDirectory)/bin/$(BrutalFlavor)/</BaseOutputPath>
+    <BrutalGeneratedDir>$(BaseIntermediateOutputPath)generated/</BrutalGeneratedDir>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <!--
+    Brutal.Browser: browser host (canvas, frame loop, input queue, time, Web Audio, logging).
+    Razor SDK is used only for its static-web-assets support: wwwroot/*.js is published at the root of the
+    consuming browser app's wwwroot (no Razor files; the assembly is an ordinary class library and compiles anywhere).
+  -->
+  <PropertyGroup>
+    <AssemblyName>Brutal.Browser</AssemblyName>
+    <RootNamespace>Brutal.Browser</RootNamespace>
+    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Core" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="NVorbis" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Brutal.Browser.Tests" />
+  </ItemGroup>
+</Project>

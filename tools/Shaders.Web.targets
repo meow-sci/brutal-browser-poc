@@ -1,0 +1,55 @@
+<Project>
+  <!--
+    Web shader pipeline (browser-wasm builds). Imported by tools/Shaders.targets when $(ShaderWebPipeline) == true.
+
+    After CompileShaders has produced <name>.<ext>.spv in $(ShaderIntermediateDir), TranslateWebShaders runs tools/build-shaders.mjs on
+    that directory: every module is validated, translated to WGSL with naga and described in
+      $(ShaderWebOutputDir)manifest.json     (format: docs/architecture.md section 6; keyed by the SHA-256 of the .spv bytes)
+      $(ShaderWebOutputDir)<name>.wgsl       (for inspection; the WGSL is also inlined in the manifest)
+    The manifest is embedded as "Shaders/manifest.json" next to the byte-identical "Shaders/<name>.<ext>.spv" resources.
+
+    Properties (all optional):
+      ShaderToolsDir   directory with build-shaders.mjs / package.json (default: the folder of this file)
+      ShaderNodeExe    node executable (default: node; Node >= 24.12)
+      ShaderNpmExe     npm executable used by EnsureToolsNodeModules (default: npm)
+    EnsureToolsNodeModules runs `npm ci` through ensure-node-modules.mjs, which holds a lock file (tools/.npm-ci.lock) so that several
+    browser projects built in parallel (dotnet build BrutalBrowser.slnx) install once: the others wait and then find node_modules.
+    The headless-browser (Tint) check is not run here; `npm test` in tools/ covers it.
+  -->
+  <PropertyGroup>
+    <ShaderToolsDir Condition="'$(ShaderToolsDir)' == ''">$(MSBuildThisFileDirectory)</ShaderToolsDir>
+    <ShaderToolsDir>$([MSBuild]::EnsureTrailingSlash('$(ShaderToolsDir)'))</ShaderToolsDir>
+    <ShaderNodeExe Condition="'$(ShaderNodeExe)' == ''">node</ShaderNodeExe>
+    <ShaderNpmExe Condition="'$(ShaderNpmExe)' == ''">npm</ShaderNpmExe>
+    <ShaderWebOutputDir>$([MSBuild]::EnsureTrailingSlash('$(ShaderWebOutputDir)'))</ShaderWebOutputDir>
+    <ShaderWebManifest>$(ShaderWebOutputDir)manifest.json</ShaderWebManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The file does not have to exist at evaluation time, only before the resources are compiled (TranslateWebShaders runs before PrepareForBuild). -->
+    <EmbeddedResource Include="$(ShaderWebManifest)" LogicalName="Shaders/manifest.json" Visible="false" Condition="'$(ShaderWebPipeline)' == 'true'" />
+    <!-- Changing the translator or its dependency lock re-runs the translation. -->
+    <_ShaderToolInput Include="$(ShaderToolsDir)*.mjs;$(ShaderToolsDir)package-lock.json" />
+  </ItemGroup>
+
+  <!-- First build on a machine: install the node dependencies of tools/ (npm ci from the lock file, offline cache preferred). Safe to
+       run from parallel builds: ensure-node-modules.mjs serialises the install with a lock file and skips it when it is done. -->
+  <Target Name="EnsureToolsNodeModules" Condition="!Exists('$(ShaderToolsDir)node_modules/naga-wasm/package.json')">
+    <Message Importance="high" Text="Installing shader tool dependencies in $(ShaderToolsDir) (npm ci)" />
+    <Exec Command="&quot;$(ShaderNodeExe)&quot; &quot;$(ShaderToolsDir)ensure-node-modules.mjs&quot; &quot;$(ShaderNpmExe)&quot;" WorkingDirectory="$(ShaderToolsDir)"
+          EnvironmentVariables="PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1" />
+  </Target>
+
+  <Target Name="TranslateWebShaders" AfterTargets="CompileShaders" DependsOnTargets="CompileShaders;EnsureToolsNodeModules"
+          Inputs="@(ShaderSource->'$(ShaderIntermediateDir)%(Filename)%(Extension).spv');@(_ShaderToolInput)"
+          Outputs="$(ShaderWebManifest)">
+    <PropertyGroup>
+      <!-- no trailing slash inside quotes: a backslash before the closing quote would escape it on Windows -->
+      <_ShaderSpvDirArg>$([System.IO.Path]::TrimEndingDirectorySeparator('$(ShaderIntermediateDir)'))</_ShaderSpvDirArg>
+      <_ShaderWebOutDirArg>$([System.IO.Path]::TrimEndingDirectorySeparator('$(ShaderWebOutputDir)'))</_ShaderWebOutDirArg>
+    </PropertyGroup>
+    <MakeDir Directories="$(ShaderIntermediateDir);$(ShaderWebOutputDir)" />
+    <Exec Command="&quot;$(ShaderNodeExe)&quot; &quot;$(ShaderToolsDir)build-shaders.mjs&quot; --spv-dir &quot;$(_ShaderSpvDirArg)&quot; --out &quot;$(_ShaderWebOutDirArg)&quot; --glslc &quot;$(GlslcPath)&quot; --target-env $(ShaderTargetEnv) --no-browser-check"
+          StandardOutputImportance="normal" StandardErrorImportance="high" />
+  </Target>
+</Project>

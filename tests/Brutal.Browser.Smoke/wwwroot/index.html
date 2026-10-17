@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Brutal.Browser smoke</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preload" id="webassembly" />
+  <script type="importmap"></script>
+  <style>
+    html, body { margin: 0; height: 100%; background: #101418; overflow: hidden; }
+    #canvas { display: block; width: 100vw; height: 100vh; }
+    #start { position: fixed; inset: 0; margin: auto; width: 14rem; height: 4rem; font: 600 1.1rem system-ui, sans-serif; cursor: pointer; }
+    #start[hidden] { display: none; }
+  </style>
+  <script type='module' src="main#[.{fingerprint}].js"></script>
+</head>
+
+<body>
+  <canvas id="canvas" tabindex="0"></canvas>
+  <button id="start" disabled>Loading...</button>
+</body>
+
+</html>

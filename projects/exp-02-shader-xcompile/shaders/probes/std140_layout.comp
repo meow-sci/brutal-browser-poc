@@ -1,0 +1,10 @@
+#version 450
+// Layout probe. The CPU writes slot i of the uniform buffer (byte offset 4*i) with the float value i, then
+// reading o[k] tells which byte offset the shader actually read.
+// std140 expectation: f[1]@16 -> 4, f[3]@48 -> 12, v2[1].x@80 -> 20, v3@96 -> 24, tail@108 -> 27, m3@112 (columns 112/128/144), m3[1].y@132 -> 33
+layout(local_size_x = 1) in;
+layout(std140, set = 0, binding = 0) uniform U { float f[4]; vec2 v2[2]; vec3 v3; float tail; mat3 m3; } u;
+layout(std430, set = 0, binding = 1) buffer O { float o[]; } outb;
+void main() {
+    outb.o[0] = u.f[1]; outb.o[1] = u.f[3]; outb.o[2] = u.v2[1].x; outb.o[3] = u.v3.x; outb.o[4] = u.tail; outb.o[5] = u.m3[1].y;
+}

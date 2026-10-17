@@ -1,0 +1,10 @@
+#version 450
+layout(local_size_x = 64) in;
+layout(std430, set = 0, binding = 0) buffer Counters { uint counter; uint data[]; } b;
+shared uint tile[64];
+void main() {
+    tile[gl_LocalInvocationID.x] = gl_GlobalInvocationID.x;
+    barrier();
+    atomicAdd(b.counter, tile[63 - gl_LocalInvocationID.x]);
+    b.data[gl_GlobalInvocationID.x] = atomicMax(b.counter, 5u);
+}
