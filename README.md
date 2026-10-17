@@ -4,6 +4,8 @@ Research, plans and experiments for running the open-source [BRUTAL](https://git
 
 The proof of concept runs BRUTAL's own Vulkan API in the browser through a managed Vulkan-on-WebGPU ICD: the sample game `samples/HelloMesh` compiles the same game sources for the desktop (MoltenVK/Vulkan, GLFW, OpenAL) and for the browser (.NET `browser-wasm`, WebGPU, Web Audio). Building a game on it (where the code goes, which BRUTAL libraries and Vulkan features exist in the browser, performance rules, debugging): [`docs/game-guide.md`](docs/game-guide.md). Component contracts: [`docs/architecture.md`](docs/architecture.md).
 
+Live demo (WebGPU browser required): https://meow.science.fail/brutal-browser-poc/ , deployed to GitHub Pages by `.github/workflows/pages.yml` on every push to `main` ([Deployment](samples/HelloMesh.Web/README.md#deployment-github-pages)).
+
 ## Quick start
 
 Prerequisites (nothing global beyond these): .NET SDK 10 (`global.json`; the `wasm-tools` workload is optional, it only enables the native relink), Node 24, `glslc` and `spirv-val` on the PATH (LunarG Vulkan SDK; on macOS it also provides the Vulkan loader and MoltenVK), `python3`, the BRUTAL source tree at commit `a25cdf8` next to this repository (`../BRUTAL`, or `-p:BrutalSourceRoot=...` / `BRUTAL_SRC`), and Chrome/Edge 113+ for WebGPU. npm packages are installed per folder (`tools/` is installed by the first browser build).

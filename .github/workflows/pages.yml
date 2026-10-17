@@ -1,0 +1,108 @@
+name: Deploy HelloMesh web sample to GitHub Pages
+
+# Publishes samples/HelloMesh.Web (Vite 8 page + the published .NET browser-wasm build of samples/HelloMesh/HelloMesh.Browser) to
+# https://meow.science.fail/brutal-browser-poc/ . The repository's Pages source must be "GitHub Actions" (artifact flow).
+# The wasm-tools workload is not installed here: the publish runs without the native relink (the Mono interpreter build).
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  # Base path of the site: https://meow.science.fail/<repository name>/
+  PAGES_BASE: /brutal-browser-poc/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # The bindings are compiled from the open-source BRUTAL tree, pinned to commit a25cdf8 (Directory.Build.props: BRUTAL_SRC).
+      - name: Checkout BRUTAL (a25cdf8)
+        uses: actions/checkout@v7
+        with:
+          repository: ahwootech/BRUTAL
+          ref: a25cdf80b2a15530e7da6cff744def9d841ad3c3
+          path: BRUTAL
+
+      - name: Point the build at the BRUTAL checkout
+        run: echo "BRUTAL_SRC=${{ github.workspace }}/BRUTAL/" >> "$GITHUB_ENV"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            samples/HelloMesh.Web/package-lock.json
+            tools/package-lock.json
+
+      # Shader pipeline (tools/README.md): glslc, spirv-val and spirv-opt come from apt; python3 runs patches/brutal/transform.py.
+      - name: Install shader tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends glslc spirv-tools python3
+          glslc --version | head -n 1
+          spirv-val --version | head -n 1
+          spirv-opt --version | head -n 1
+
+      - name: Install npm packages
+        run: |
+          npm ci --prefix tools
+          npm ci --prefix samples/HelloMesh.Web
+
+      - name: Publish the .NET browser app
+        working-directory: samples/HelloMesh.Web
+        run: npm run build:dotnet
+
+      - name: Build the page
+        working-directory: samples/HelloMesh.Web
+        run: npm run build -- --base "$PAGES_BASE"
+
+      # GitHub Pages does not negotiate precompressed files (it compresses on the fly), so drop the .br/.gz copies.
+      # .nojekyll keeps files and folders that start with an underscore (_framework/) from being treated specially.
+      - name: Prepare the Pages artifact
+        working-directory: samples/HelloMesh.Web
+        run: |
+          find dist -type f \( -name '*.br' -o -name '*.gz' \) -delete
+          touch dist/.nojekyll
+          du -sh dist
+          test -f dist/index.html && test -f dist/_framework/dotnet.js
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: samples/HelloMesh.Web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

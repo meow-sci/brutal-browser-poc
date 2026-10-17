@@ -80,6 +80,34 @@ node test/serve-check.mjs [--preview]
 
 The script starts the Vite dev server itself (`createServer`), launches Chromium (`channel: 'chromium'` = full Chromium in new headless mode, which has a real Metal/Vulkan/D3D12 WebGPU adapter; `chrome-headless-shell`, what `headless: true` alone would use, has no WebGPU adapter), captures the console, and writes `test/out/frame.png` and `test/out/console.log`. Pixels: a screenshot decoded with `pngjs` (canvas centre must differ from the corner clear colour) and, when present, `window.__brutal.readPixel(x, y)` (GPU readback) plus `window.__brutal.frameCount/lastError`. Audio: `window.__brutalAudioState()` or `window.__brutal.audio.getState()`, skipped when neither exists, and a real output check: `window.__brutal.audio.getOutputLevel()` (RMS of the master mix through an `AnalyserNode`) is polled for a value above 0.01 within 500 ms of `AUDIO play`, after Space (with the canvas blurred, to prove the key does not need focus) and after a click on `#play-sound`; it reads 0 for a suspended context, a source that never started, a muted master or a missing resume (the checks were verified to fail for each of those). The pre-gesture phase evaluates through CDP with `userGesture: false`, because `page.evaluate()` and locator calls count as user gestures and would unlock the AudioContext. `--strict-autoplay` pins `--autoplay-policy=document-user-activation-required`, Chrome's desktop default; do not use `user-gesture-required`, which for Web Audio only restricts cross-origin iframes (the context of a top-level page starts `running`). The level cannot see the OS mixer, a muted tab or a muted device. It fails on any `ERROR` console line, page error, failed request, HTTP >= 400 or visible `#error`. Exit codes: `0` all checks passed, `1` a check failed, `2` the browser could not be launched. `navigator.gpu` needs a secure context, so the page is always loaded from `http://localhost:<port>/`.
 
+## Deployment (GitHub Pages)
+
+Live: **https://meow.science.fail/brutal-browser-poc/** (repository `meow-sci/brutal-browser-poc`, Pages source "GitHub Actions"). [`.github/workflows/pages.yml`](../../.github/workflows/pages.yml) deploys it on every push to `main` and on manual `workflow_dispatch` (Actions tab > "Deploy HelloMesh web sample to GitHub Pages" > Run workflow):
+
+1. Checks out this repository and the open-source BRUTAL tree (`ahwootech/BRUTAL` at commit `a25cdf8`) into `BRUTAL/`, and exports `BRUTAL_SRC=$GITHUB_WORKSPACE/BRUTAL/` (read by `Directory.Build.props`).
+2. Sets up the .NET SDK from `global.json`, Node 24 (npm cache of `samples/HelloMesh.Web` and `tools`) and installs `glslc`, `spirv-tools` (`spirv-val`, `spirv-opt`) and `python3` with apt (Ubuntu 24.04), which the shader pipeline and `patches/brutal/transform.py` need.
+3. `npm ci` in `tools/` and `samples/HelloMesh.Web/`, `npm run build:dotnet` (`dotnet publish -c Release`; the `wasm-tools` workload is not installed on the runner, so this is the Mono interpreter build without the native relink), then `npm run build -- --base /brutal-browser-poc/`.
+4. Deletes the `.br`/`.gz` copies from `dist/` (Pages does not negotiate precompressed files and compresses on the fly), adds `dist/.nojekyll` and uploads `dist/` with `actions/upload-pages-artifact`; the `deploy` job (`github-pages` environment) publishes it with `actions/deploy-pages`.
+
+The site lives under the base path `/brutal-browser-poc/`. `main.ts` and the plugin resolve every file against `import.meta.env.BASE_URL`, and the .NET runtime resolves `_framework/*` relative to `dotnet.js`, so nothing else depends on the path. The page needs a secure context for `navigator.gpu`: use the `https://` URL.
+
+Reproduce the artifact locally and test it with the same base path:
+
+```sh
+cd samples/HelloMesh.Web
+npm run build:dotnet && npm run build -- --base /brutal-browser-poc/
+find dist -type f \( -name '*.br' -o -name '*.gz' \) -delete && touch dist/.nojekyll
+npx vite preview --base /brutal-browser-poc/ --port 4180 &     # then, in another shell:
+node test/e2e.mjs --url http://localhost:4180/brutal-browser-poc/
+```
+
+Run the end-to-end test against the live site (28 checks; needs the local Chromium of `npm run test:e2e`, the page itself is loaded from the internet):
+
+```sh
+node test/e2e.mjs --url https://meow.science.fail/brutal-browser-poc/
+node test/serve-check.mjs --url https://meow.science.fail/brutal-browser-poc/     # every file the runtime requests: 200 + MIME type
+```
+
 ## What HelloMesh.Browser must provide
 
 - `Microsoft.NET.Sdk.WebAssembly`, `WasmEnableHotReload=false`, `InvariantGlobalization=true`; `Main` returns promptly; `[JSExport] Brutal.Browser.BrowserHost.Tick(double) : bool` in `Brutal.Browser.dll`.
